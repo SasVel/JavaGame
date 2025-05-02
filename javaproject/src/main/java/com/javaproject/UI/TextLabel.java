@@ -1,4 +1,4 @@
-package com.javaproject;
+package com.javaproject.UI;
 
 import java.awt.Color;
 import java.awt.Font;

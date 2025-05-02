@@ -8,6 +8,10 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
+import com.javaproject.UI.TextLabel;
+import com.javaproject.sound.SoundManager;
+import com.javaproject.sound.SoundManager.SoundTypes;
+
 public class GamePanel extends JPanel implements Runnable{
 	// Screen settings
 	final int orginialTileSize = 16; //X and Y
@@ -23,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
 	InputManager inputManager = new InputManager();
+	SoundManager soundManager = new SoundManager();
 	TextLabel label = new TextLabel();
 
 	public GamePanel() {
@@ -56,7 +61,8 @@ public class GamePanel extends JPanel implements Runnable{
 
 	public void update() {
 		if (inputManager.currentState == InputManager.state.Pressed) {
-			label.text += inputManager.currKeyChar;
+			label.text += (char)inputManager.currKeyCode;
+			soundManager.playSound(SoundTypes.TypeKey);
 			inputManager.reset();
 		}
 	}
