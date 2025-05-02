@@ -11,13 +11,16 @@ public class InputManager implements KeyListener{
 	}
 
 	public state currentState;
-	public char keyChar;
+	public char currKeyChar;
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		if (Character.isAlphabetic(arg0.getKeyChar()) || arg0.getKeyChar() == KeyEvent.VK_SPACE) {
+		char keyChar = arg0.getKeyChar();
+		if (Character.isLetterOrDigit(keyChar) 
+			|| Character.isSpaceChar(keyChar)
+			|| keyChar == '-') {
 			currentState = state.Pressed;
-			keyChar = arg0.getKeyChar();
+			currKeyChar = arg0.getKeyChar();
 		}
 	}
 

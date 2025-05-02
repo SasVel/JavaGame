@@ -56,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 	public void update() {
 		if (inputManager.currentState == InputManager.state.Pressed) {
-			label.text += inputManager.keyChar;
+			label.text += inputManager.currKeyChar;
 			inputManager.reset();
 		}
 	}
