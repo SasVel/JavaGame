@@ -15,14 +15,13 @@ import com.javaproject.sound.SoundManager;
 
 public class GamePanel extends JPanel implements Runnable{
 	// Screen settings
-	final int orginialTileSize = 16; //X and Y
-	final int scale = 3;
 
-	final int tileSize = orginialTileSize * scale;
-	final int screenCol = 16;
-	final int screenRow = 12;
-	final int screenWidth = tileSize * screenCol;
-	final int screenHeight = tileSize * screenRow;
+	//120 for 1920x1080
+	final int tileSize = 100;
+	final int screenAspectX = 16;
+	final int screenAspectY = 9;
+	final int screenWidth = tileSize * screenAspectX;
+	final int screenHeight = tileSize * screenAspectY;
 
 	Thread gameThread;
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
