@@ -6,26 +6,33 @@ import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TextLabel {
 
-	public String text = "";
+	public List<String> textList = new ArrayList<>();
 	public int x, y = 200;
 
 	private Font font;
+	private Color color;
+	private int fontSize = 45;
 
-	public TextLabel() {
+	public TextLabel(Color color) {
 		try {
 			InputStream is = getClass().getResourceAsStream("/font/SpecialElite.ttf");
-			font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 45);
+			font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, fontSize);
+			this.color = color;
 		} 
-		catch (FontFormatException e) { e.printStackTrace(); } 
-		catch (IOException e) { e.printStackTrace(); }
+		catch (FontFormatException | IOException e) { e.printStackTrace(); }
 	}
 
 	public void draw(Graphics2D g) {
 		g.setFont(font);
-		g.setColor(Color.WHITE);
-		g.drawString(text, x, y);
+		g.setColor(color);
+
+		for (int i = 0; i < textList.size(); i++) {
+			g.drawString(textList.get(i), x, y + ( fontSize * i));
+		}
 	}
 }

@@ -18,7 +18,8 @@ public class InputManager implements KeyListener{
 		char keyChar = arg0.getKeyChar();
 		if (Character.isLetterOrDigit(keyChar) 
 			|| Character.isSpaceChar(keyChar)
-			|| keyChar == KeyEvent.VK_MINUS) {
+			|| keyChar == KeyEvent.VK_MINUS
+			|| keyChar == KeyEvent.VK_COMMA) {
 			currentState = state.Pressed;
 			currKeyCode = arg0.getKeyChar();
 		}

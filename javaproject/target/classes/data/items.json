@@ -1,0 +1,16 @@
+[
+	{
+		"name": "TestTest",
+		"desc": "TestTest",
+		"price": "55.89",
+		"difficulty": "1",
+		"imgPathRelative": "TestTest"
+	},
+	{
+		"name": "TestTest2",
+		"desc": "TestTest2",
+		"price": "70",
+		"difficulty": "2",
+		"imgPathRelative": "TestTest2"
+	}
+]

@@ -1,11 +1,14 @@
 package com.javaproject.sound;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SoundManager {
 	Clip clip;
@@ -32,15 +35,9 @@ public class SoundManager {
 
 	public void playSound(SoundTypes type) {
 		switch (type) {
-			case TypeKey:
-				playRandSound(typeKeySounds);
-				break;
-			case SpaceKey:
-				playRandSound(spaceKeySounds);
-				break;
-			case EnterKey:
-				playRandSound(enterKeySounds);
-				break;
+			case TypeKey -> playRandSound(typeKeySounds);
+			case SpaceKey -> playRandSound(spaceKeySounds);
+			case EnterKey -> playRandSound(enterKeySounds);
 		}
 	}
 
@@ -51,7 +48,7 @@ public class SoundManager {
 			clip = AudioSystem.getClip();
 			clip.open(ais);
 			clip.start();
-		} catch (Exception e) {
+		} catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		}
 	}

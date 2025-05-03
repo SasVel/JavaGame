@@ -8,9 +8,10 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
-import com.javaproject.UI.TextLabel;
+import com.javaproject.UI.TypeDisplayLabel;
+import com.javaproject.UI.TypeInputLabel;
+import com.javaproject.items.ItemsManager;
 import com.javaproject.sound.SoundManager;
-import com.javaproject.sound.SoundManager.SoundTypes;
 
 public class GamePanel extends JPanel implements Runnable{
 	// Screen settings
@@ -28,7 +29,11 @@ public class GamePanel extends JPanel implements Runnable{
 
 	InputManager inputManager = new InputManager();
 	SoundManager soundManager = new SoundManager();
-	TextLabel label = new TextLabel();
+	ItemsManager itemsManager = new ItemsManager();
+
+	//TextLabel label = new TextLabel();
+	TypeDisplayLabel typeDisplayLabel = new TypeDisplayLabel(Color.gray);
+	TypeInputLabel typeInputLabel = new TypeInputLabel(Color.white, inputManager, soundManager);
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -56,15 +61,12 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 
 	public void onStart() {
-
+		typeDisplayLabel.LoadItems(itemsManager.getAllItems());
+		typeInputLabel.LoadTextList(typeDisplayLabel.textList);
 	}
 
 	public void update() {
-		if (inputManager.currentState == InputManager.state.Pressed) {
-			label.text += (char)inputManager.currKeyCode;
-			soundManager.playSound(SoundTypes.TypeKey);
-			inputManager.reset();
-		}
+		typeInputLabel.update();
 	}
 
 	@Override
@@ -73,7 +75,8 @@ public class GamePanel extends JPanel implements Runnable{
 
 		Graphics2D graphics = (Graphics2D)g;
 		
-		label.draw(graphics);
+		typeDisplayLabel.draw(graphics);
+		typeInputLabel.draw(graphics);
 
 		graphics.dispose();
 	}
