@@ -1,6 +1,7 @@
 package com.javaproject.UI;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class TypeInputLabel extends TextLabel {
 	public List<String> expectedTextList = new ArrayList<>();
 	private int currIdx = 0;
 	private int currLine = 0;
+	public boolean isTextCompleted = false;
 
 	public TypeInputLabel(Color color, InputManager inputManager, SoundManager soundManager) {
 		super(color);
@@ -30,18 +32,44 @@ public class TypeInputLabel extends TextLabel {
 	}
 	
 	public void update() {
-		if (input.currentState == InputManager.state.Pressed
-			&& (char)input.currKeyCode == expectedTextList.get(currLine).charAt(currIdx)) {
-			textList.set(currLine, textList.get(currLine) + (char)input.currKeyCode);
+		if (input.currentState != InputManager.state.Pressed && !isTextCompleted) return;
 
+		char keyChar = (char)input.currKeyCode;
+		String currLineStr = expectedTextList.get(currLine);
+
+		if (currIdx >= currLineStr.length()
+			&& keyChar == KeyEvent.VK_ENTER) {
+			if (currLine + 1 >= expectedTextList.size()) {
+				ResetTextBox();
+				isTextCompleted = true;
+			} else {
+				SetNewLine();
+			}
+
+			sound.playSound(SoundTypes.EnterKey);
+		} else if (currLineStr.length() != currIdx
+			&& keyChar == currLineStr.charAt(currIdx)) {
+		
+			textList.set(currLine, textList.get(currLine) + keyChar);
 			currIdx++;
-			sound.playSound(SoundTypes.TypeKey);
 			input.reset();
 
-			if (expectedTextList.get(currLine).length() == currIdx) {
-				currIdx = 0;
-				currLine++;
+			if (keyChar == KeyEvent.VK_SPACE) {
+				sound.playSound(SoundTypes.SpaceKey);
+			} else {
+				sound.playSound(SoundTypes.TypeKey);
 			}
+
 		}
+	}
+
+	private void SetNewLine() {
+		currIdx = 0;
+		currLine++;
+	}
+
+	private void ResetTextBox() {
+		currIdx = 0;
+		currLine = 0;
 	}
 }

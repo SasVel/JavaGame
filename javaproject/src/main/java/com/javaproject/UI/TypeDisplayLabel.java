@@ -12,6 +12,7 @@ public class TypeDisplayLabel extends TextLabel {
 	}
 
 	public void LoadItems(List<Item> items) {
+		textList.clear();
 		for (Item item : items) {
 			textList.add(String.format("%s - %s", item.getName(), String.format("%.2f", item.getPrice())));
 		}

@@ -3,13 +3,14 @@ package com.javaproject.items;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ItemsManager {
 	
+	Random rand = new Random();
 	ObjectMapper mapper = new ObjectMapper();
 	private List<Item> items;
 	
@@ -23,6 +24,16 @@ public class ItemsManager {
 
 	public List<Item> getAllItems() {
 		return items;
+	}
+
+	public List<Item> getRandItemsInRange(int lower, int upper) {
+		int count = rand.nextInt(lower, upper + 1);
+
+		List<Item> resItems = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			resItems.add(items.get(rand.nextInt(items.size() - 1)));
+		}
+		return resItems;
 	}
 
 	public List<Item> getItemsByDifficulty(short difficulty) {

@@ -30,10 +30,11 @@ public class GamePanel extends JPanel implements Runnable{
 	InputManager inputManager = new InputManager();
 	SoundManager soundManager = new SoundManager();
 	ItemsManager itemsManager = new ItemsManager();
-
-	//TextLabel label = new TextLabel();
+	
 	TypeDisplayLabel typeDisplayLabel = new TypeDisplayLabel(Color.gray);
 	TypeInputLabel typeInputLabel = new TypeInputLabel(Color.white, inputManager, soundManager);
+
+	GameController gameController = new GameController(typeDisplayLabel, typeInputLabel, itemsManager);
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -61,11 +62,11 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 
 	public void onStart() {
-		typeDisplayLabel.LoadItems(itemsManager.getAllItems());
-		typeInputLabel.LoadTextList(typeDisplayLabel.textList);
+
 	}
 
 	public void update() {
+		gameController.update();
 		typeInputLabel.update();
 	}
 

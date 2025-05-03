@@ -1,8 +1,22 @@
 [
 	{
-		"name": "TestTest",
-		"desc": "TestTest",
-		"price": "55.89",
+		"name": "Health Vial",
+		"desc": "A really small health potion",
+		"price": "3.99",
+		"difficulty": "1",
+		"imgPathRelative": "TestTest"
+	},
+	{
+		"name": "Health Potion",
+		"desc": "A regular health potion",
+		"price": "6.99",
+		"difficulty": "1",
+		"imgPathRelative": "TestTest"
+	},
+	{
+		"name": "Health Jug",
+		"desc": "A really big health potion",
+		"price": "10.50",
 		"difficulty": "1",
 		"imgPathRelative": "TestTest"
 	},
