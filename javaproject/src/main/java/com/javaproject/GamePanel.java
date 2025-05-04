@@ -14,7 +14,7 @@ import com.javaproject.items.ItemsManager;
 import com.javaproject.sound.SoundManager;
 
 public class GamePanel extends JPanel implements Runnable{
-	// Screen settings
+	// SCREEN SETTINGS
 
 	//120 for 1920x1080
 	final int tileSize = 100;
@@ -23,6 +23,10 @@ public class GamePanel extends JPanel implements Runnable{
 	final int screenWidth = tileSize * screenAspectX;
 	final int screenHeight = tileSize * screenAspectY;
 
+	//FPS
+	final int FPS = 60;
+
+	//INIT
 	Thread gameThread;
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
@@ -51,10 +55,23 @@ public class GamePanel extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		onStart();
-		while (gameThread != null) {
 
-			update();
-			repaint();
+		double drawInterval = 1000000000/FPS;
+		double delta = 0;
+		long lastTime = System.nanoTime();
+		long currentTime;
+
+		while (gameThread != null) {
+			currentTime = System.nanoTime();
+			delta += (currentTime - lastTime) / drawInterval;
+			lastTime = currentTime;
+
+			//Actual game loop
+			if (delta >= 1) {
+				update();
+				repaint();
+				delta--;
+			}
 
 			toolkit.sync();
 		}
