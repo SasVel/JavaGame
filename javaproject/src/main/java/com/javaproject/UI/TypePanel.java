@@ -1,0 +1,52 @@
+package com.javaproject.UI;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+
+import com.javaproject.InputManager;
+import com.javaproject.items.ItemsManager;
+import com.javaproject.sound.SoundManager;
+
+public class TypePanel extends JPanel {
+
+	public TypeDisplayLabel displayLabel;
+	public TypeInputLabel inputLabel;
+
+	InputManager inputManager;
+	SoundManager soundManager;
+
+	Color bg = Color.MAGENTA;
+
+	public TypePanel(InputManager _inputManager, SoundManager _soundManager) {
+		super(new BorderLayout());
+		inputManager = _inputManager;
+		soundManager = _soundManager;
+
+		initComponenets();
+	}
+
+	private void initComponenets() {
+		displayLabel = new TypeDisplayLabel(Color.gray);
+		inputLabel = new TypeInputLabel(Color.white, inputManager, soundManager);
+	}
+	
+	public void update() {
+		inputLabel.update();
+	}
+
+	public void draw(Graphics2D g) {
+		g.setColor(bg);
+		g.fillRect(0, 0, 320, 320);
+
+		displayLabel.draw(g);
+		inputLabel.draw(g);
+	}
+
+	public void ReloadTextList(ItemsManager items) {
+		displayLabel.LoadItems(items.getRandItemsInRange(2, 3));
+		inputLabel.LoadTextList(displayLabel.textList);
+	}
+}

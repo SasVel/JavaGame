@@ -1,5 +1,7 @@
 package com.javaproject;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 
 public class Main {
@@ -9,7 +11,7 @@ public class Main {
 		window.setResizable(false);
 		window.setTitle("Test Phihi");
 
-		GamePanel gamePanel = new GamePanel();
+		GamePanel gamePanel = new GamePanel(new BorderLayout());
 		window.add(gamePanel);
 
 		window.pack();

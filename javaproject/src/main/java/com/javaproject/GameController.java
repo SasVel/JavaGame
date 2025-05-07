@@ -1,32 +1,24 @@
 package com.javaproject;
 
-import com.javaproject.UI.TypeDisplayLabel;
-import com.javaproject.UI.TypeInputLabel;
+import com.javaproject.UI.TypePanel;
 import com.javaproject.items.ItemsManager;
 
 public class GameController {
 
-	TypeDisplayLabel displayLabel;
-	TypeInputLabel inputLabel;
+	TypePanel typePanel;
 	ItemsManager items;
 	
-	public GameController(TypeDisplayLabel typeDisplayLabel, TypeInputLabel typeInputLabel, ItemsManager itemsManager) {
-		displayLabel = typeDisplayLabel;
-		inputLabel = typeInputLabel;
-		items = itemsManager;
+	public GameController(TypePanel _typePanel, ItemsManager _itemsManager) {
+		typePanel = _typePanel;
+		items = _itemsManager;
 
-		ReloadTextList();
+		typePanel.ReloadTextList(items);
 	}
 
 	public void update() {
-		if (inputLabel.isTextCompleted) {
-			ReloadTextList();
-			inputLabel.isTextCompleted = false;
+		if (typePanel.inputLabel.isTextCompleted) {
+			typePanel.ReloadTextList(items);
+			typePanel.inputLabel.isTextCompleted = false;
 		}
-	}
-
-	private void ReloadTextList() {
-		displayLabel.LoadItems(items.getRandItemsInRange(2, 3));
-		inputLabel.LoadTextList(displayLabel.textList);
 	}
 }

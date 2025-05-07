@@ -12,7 +12,8 @@ import java.util.List;
 public class TextLabel {
 
 	public List<String> textList = new ArrayList<>();
-	public int x, y = 200;
+	public int x = 200;
+	public int y = 200;
 
 	private Font font;
 	private Color color;
@@ -32,7 +33,7 @@ public class TextLabel {
 		g.setColor(color);
 
 		for (int i = 0; i < textList.size(); i++) {
-			g.drawString(textList.get(i), x, y + ( fontSize * i));
+			g.drawString(textList.get(i), x, (y + fontSize) + (fontSize * i));
 		}
 	}
 }

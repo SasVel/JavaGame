@@ -28,7 +28,7 @@ public class TypeInputLabel extends TextLabel {
 	public void LoadTextList(List<String> list) {
 		expectedTextList = list;
 		textList.clear();
-		for (String str : list) { textList.add(""); }
+		for (String _str : list) { textList.add(""); }
 	}
 	
 	public void update() {

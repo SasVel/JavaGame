@@ -1,21 +1,21 @@
 package com.javaproject;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.LayoutManager;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
-import com.javaproject.UI.TypeDisplayLabel;
-import com.javaproject.UI.TypeInputLabel;
+import com.javaproject.UI.TypePanel;
 import com.javaproject.items.ItemsManager;
 import com.javaproject.sound.SoundManager;
 
 public class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS
-
 	//120 for 1920x1080
 	final int tileSize = 100;
 	final int screenAspectX = 16;
@@ -34,12 +34,22 @@ public class GamePanel extends JPanel implements Runnable{
 	SoundManager soundManager = new SoundManager();
 	ItemsManager itemsManager = new ItemsManager();
 	
-	TypeDisplayLabel typeDisplayLabel = new TypeDisplayLabel(Color.gray);
-	TypeInputLabel typeInputLabel = new TypeInputLabel(Color.white, inputManager, soundManager);
+	TypePanel typePanel = new TypePanel(inputManager, soundManager);
 
-	GameController gameController = new GameController(typeDisplayLabel, typeInputLabel, itemsManager);
+
+	GameController gameController = new GameController(typePanel, itemsManager);
 
 	public GamePanel() {
+		super();
+		configure();
+	}
+
+	public GamePanel(LayoutManager layout) {
+		super(layout);
+		configure();
+	}
+
+	public void configure() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.BLACK);
 		this.setDoubleBuffered(true);
@@ -68,22 +78,23 @@ public class GamePanel extends JPanel implements Runnable{
 
 			//Actual game loop
 			if (delta >= 1) {
+
 				update();
 				repaint();
-				delta--;
-			}
 
-			toolkit.sync();
+				delta--;
+				toolkit.sync();
+			}
 		}
 	}
 
 	public void onStart() {
-
+		this.add(typePanel, BorderLayout.EAST);
 	}
 
 	public void update() {
 		gameController.update();
-		typeInputLabel.update();
+		typePanel.update();
 	}
 
 	@Override
@@ -92,8 +103,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 		Graphics2D graphics = (Graphics2D)g;
 		
-		typeDisplayLabel.draw(graphics);
-		typeInputLabel.draw(graphics);
+		typePanel.draw(graphics);
 
 		graphics.dispose();
 	}
