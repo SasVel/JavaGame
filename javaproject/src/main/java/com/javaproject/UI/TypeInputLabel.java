@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javaproject.InputManager;
+import com.javaproject.interfaces.TypingInputListener;
 import com.javaproject.sound.SoundManager;
 import com.javaproject.sound.SoundManager.SoundTypes;
 
@@ -19,13 +20,15 @@ public class TypeInputLabel extends TextLabel {
 	private int currLine = 0;
 	public boolean isTextCompleted = false;
 
+	private TypingInputListener listener;
+
 	public TypeInputLabel(Color color, InputManager inputManager, SoundManager soundManager) {
 		super(color);
 		input = inputManager;
 		sound = soundManager;
 	}
 
-	public void LoadTextList(List<String> list) {
+	public void loadTextList(List<String> list) {
 		expectedTextList = list;
 		textList.clear();
 		for (String _str : list) { textList.add(""); }
@@ -40,10 +43,10 @@ public class TypeInputLabel extends TextLabel {
 		if (currIdx >= currLineStr.length()
 			&& keyChar == KeyEvent.VK_ENTER) {
 			if (currLine + 1 >= expectedTextList.size()) {
-				ResetTextBox();
-				isTextCompleted = true;
+				resetTextBox();
+				textCompleted();
 			} else {
-				SetNewLine();
+				setNewLine();
 			}
 
 			sound.playSound(SoundTypes.EnterKey);
@@ -63,12 +66,29 @@ public class TypeInputLabel extends TextLabel {
 		}
 	}
 
-	private void SetNewLine() {
-		currIdx = 0;
-		currLine++;
+	public TypingInputListener getListener() {
+		return listener;
 	}
 
-	private void ResetTextBox() {
+	public void setListener(TypingInputListener listener) {
+		this.listener = listener;
+	}
+
+	private void newLineStarted() {
+		listener.newLineStarted();
+	}
+
+	private void textCompleted() {
+		listener.textCompleted();
+	}
+
+	private void setNewLine() {
+		currIdx = 0;
+		currLine++;
+		newLineStarted();
+	}
+
+	private void resetTextBox() {
 		currIdx = 0;
 		currLine = 0;
 	}

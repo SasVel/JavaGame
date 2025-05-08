@@ -14,7 +14,7 @@ import com.javaproject.UI.TypePanel;
 import com.javaproject.items.ItemsManager;
 import com.javaproject.sound.SoundManager;
 
-public class GamePanel extends JPanel implements Runnable{
+public final class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS
 	//120 for 1920x1080
 	final int tileSize = 100;
@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 
 	GameController gameController = new GameController(typePanel, itemsManager);
+	private Graphics2D graphics;
 
 	public GamePanel() {
 		super();
@@ -93,17 +94,15 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 
 	public void update() {
-		gameController.update();
 		typePanel.update();
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		Graphics2D graphics = (Graphics2D)g;
+		graphics = (Graphics2D)g;
 		
-		typePanel.draw(graphics);
+		gameController.draw(graphics);
 
 		graphics.dispose();
 	}

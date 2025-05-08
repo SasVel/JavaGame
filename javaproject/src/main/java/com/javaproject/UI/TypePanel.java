@@ -3,14 +3,16 @@ package com.javaproject.UI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.List;
 
 import javax.swing.JPanel;
 
 import com.javaproject.InputManager;
-import com.javaproject.items.ItemsManager;
+import com.javaproject.data.Item;
+import com.javaproject.interfaces.Drawable;
 import com.javaproject.sound.SoundManager;
 
-public class TypePanel extends JPanel {
+public class TypePanel extends JPanel implements Drawable {
 
 	public TypeDisplayLabel displayLabel;
 	public TypeInputLabel inputLabel;
@@ -37,6 +39,7 @@ public class TypePanel extends JPanel {
 		inputLabel.update();
 	}
 
+	@Override
 	public void draw(Graphics2D g) {
 		g.setColor(bg);
 		g.fillRect(0, 0, 320, 320);
@@ -45,8 +48,8 @@ public class TypePanel extends JPanel {
 		inputLabel.draw(g);
 	}
 
-	public void ReloadTextList(ItemsManager items) {
-		displayLabel.LoadItems(items.getRandItemsInRange(2, 3));
-		inputLabel.LoadTextList(displayLabel.textList);
+	public void reloadTextList(List<Item> items) {
+		displayLabel.loadItems(items);
+		inputLabel.loadTextList(displayLabel.textList);
 	}
 }

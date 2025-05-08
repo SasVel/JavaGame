@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javaproject.data.Item;
 
 public class ItemsManager {
 	
