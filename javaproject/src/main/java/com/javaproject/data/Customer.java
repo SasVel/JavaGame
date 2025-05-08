@@ -32,7 +32,7 @@ public class Customer implements Drawable, TypingInputListener {
 
 		this.data = _data;
 		this.typePanel = _typePanel;
-		this.items = _itemsManager.getRandItemsInRange(1, 2);
+		this.items = _itemsManager.getRandItemsInRange(1, 4);
 		this.currItemIdx = 0;
 	}
 
@@ -48,13 +48,11 @@ public class Customer implements Drawable, TypingInputListener {
 		return currItem;
 	}
 
-	public void setNextItem() {
+	public boolean setNextItem() {
+		if (currItemIdx + 1 > items.size() - 1) return false;
 		currItemIdx++;
-		if (currItemIdx > items.size() - 1) {
-			customerDone();
-			return;
-		}
 		this.currItem = items.get(currItemIdx);
+		return true;
 	}
 
 	public String getName() {
@@ -96,7 +94,10 @@ public class Customer implements Drawable, TypingInputListener {
 
 	@Override
 	public void newLineStarted() {
-		setNextItem();
+		boolean res = setNextItem();
+		if (!res) {
+			typePanel.inputLabel.addSeperator();
+		}
 	}
 
 	@Override

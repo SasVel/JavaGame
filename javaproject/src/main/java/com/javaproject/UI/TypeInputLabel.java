@@ -12,8 +12,8 @@ import com.javaproject.sound.SoundManager.SoundTypes;
 
 public class TypeInputLabel extends TextLabel {
 
-	private InputManager input;
-	private SoundManager sound;
+	private final InputManager input;
+	private final SoundManager sound;
 
 	public List<String> expectedTextList = new ArrayList<>();
 	private int currIdx = 0;
@@ -22,8 +22,8 @@ public class TypeInputLabel extends TextLabel {
 
 	private TypingInputListener listener;
 
-	public TypeInputLabel(Color color, InputManager inputManager, SoundManager soundManager) {
-		super(color);
+	public TypeInputLabel(Color color, int _fontSize, InputManager inputManager, SoundManager soundManager) {
+		super(color, _fontSize);
 		input = inputManager;
 		sound = soundManager;
 	}
@@ -31,7 +31,9 @@ public class TypeInputLabel extends TextLabel {
 	public void loadTextList(List<String> list) {
 		expectedTextList = list;
 		textList.clear();
-		for (String _str : list) { textList.add(""); }
+		for (int i = 0; i < list.size() + 2; i++) {
+			textList.add("");
+		}
 	}
 	
 	public void update() {
@@ -91,5 +93,10 @@ public class TypeInputLabel extends TextLabel {
 	private void resetTextBox() {
 		currIdx = 0;
 		currLine = 0;
+	}
+
+	public void addSeperator() {
+		textList.set(currLine, seperator);
+		currLine++;
 	}
 }

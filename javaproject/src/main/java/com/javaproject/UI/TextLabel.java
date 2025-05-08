@@ -15,15 +15,19 @@ public class TextLabel {
 	private int x = 200;
 	private int y = 200;
 
-	private static Font font;
+	private Font font;
 	private Color color;
-	private int fontSize = 40;
+	private float fontSize = 40;
+	private int lineSeperation = 5;
 
-	public TextLabel(Color color) {
+	protected String seperator = "----------------";
+
+	public TextLabel(Color color, float _fontSize) {
 		try {
 			InputStream is = getClass().getResourceAsStream("/font/SpecialElite.ttf");
-			font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, fontSize);
+			font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, _fontSize);
 			this.color = color;
+			fontSize = _fontSize;
 		} 
 		catch (FontFormatException | IOException e) { e.printStackTrace(); }
 	}
@@ -44,12 +48,13 @@ public class TextLabel {
 		this.y = y;
 	}
 
-	public int getFontSize() {
+	public float getFontSize() {
 		return fontSize;
 	}
 
 	public void setFontSize(int fontSize) {
 		this.fontSize = fontSize;
+		font = font.deriveFont(Font.PLAIN, fontSize);
 	}
 
 	public void draw(Graphics2D g) {
@@ -57,7 +62,7 @@ public class TextLabel {
 		g.setColor(color);
 
 		for (int i = 0; i < textList.size(); i++) {
-			g.drawString(textList.get(i), x, (y + fontSize) + (fontSize * i));
+			g.drawString(textList.get(i), x, (y + fontSize + lineSeperation) + (fontSize * i));
 		}
 	}
 }

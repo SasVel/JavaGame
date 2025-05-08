@@ -44,8 +44,8 @@ public class TypePanel extends JPanel implements Drawable {
 	}
 
 	private void initComponenets() {
-		displayLabel = new TypeDisplayLabel(Color.gray);
-		inputLabel = new TypeInputLabel(Color.black, inputManager, soundManager);
+		displayLabel = new TypeDisplayLabel(Color.gray, 32);
+		inputLabel = new TypeInputLabel(Color.black, 32, inputManager, soundManager);
 
 		int textX = x + 210;
 		int textY = y + 25;
@@ -69,7 +69,7 @@ public class TypePanel extends JPanel implements Drawable {
 	}
 
 	public void reloadTextList(List<Item> items) {
-		displayLabel.loadItems(items);
+		displayLabel.loadText(items);
 		inputLabel.loadTextList(displayLabel.textList);
 	}
 }

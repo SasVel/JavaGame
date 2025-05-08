@@ -40,8 +40,7 @@ public class GameDay implements Drawable, CustomerDoneListener{
 	}
 
 	private void configDayLabel() {
-		dayLabel = new TextLabel(Color.white);
-		dayLabel.setFontSize(75);
+		dayLabel = new TextLabel(Color.white, 65);
 		dayLabel.setX(750);
 		dayLabel.setY(-10);
 		dayLabel.textList.add("Day " + id);

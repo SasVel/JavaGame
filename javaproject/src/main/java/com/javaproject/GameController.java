@@ -11,9 +11,9 @@ import com.javaproject.items.ItemsManager;
 
 public final class GameController implements Drawable, DayDoneListener{
 
-	private TypePanel typePanel;
-	private ItemsManager items;
-	private CustomersManager customersManager;
+	private final TypePanel typePanel;
+	private final ItemsManager items;
+	private final CustomersManager customersManager;
 	private GameDay currentDay;
 	
 	public GameController(TypePanel _typePanel, ItemsManager _itemsManager, CustomersManager _customersManager) {

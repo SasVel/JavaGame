@@ -7,11 +7,18 @@
 		"imgPathRelative": "/data/ItemImages/HealthVial.png"
 	},
 	{
-		"name": "Health Potion",
-		"desc": "A regular health potion",
-		"price": "6.99",
+		"name": "Swiftness Vial",
+		"desc": "A small swiftness potion",
+		"price": "4.50",
 		"difficulty": "1",
-		"imgPathRelative": "/data/ItemImages/HealthPotion.png"
+		"imgPathRelative": "/data/ItemImages/SwiftnessVial.png"
+	},
+	{
+		"name": "Constitution Vial",
+		"desc": "A small constitution potion",
+		"price": "5.45",
+		"difficulty": "1",
+		"imgPathRelative": "/data/ItemImages/ConstitutionVial.png"
 	},
 	{
 		"name": "Health Potion",
