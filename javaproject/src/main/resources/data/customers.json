@@ -1,6 +1,14 @@
 [
 	{
 		"name": "Goshko",
-		"imgPathRelative": ""
+		"imgRelativePath": ""
+	},
+	{
+		"name": "Petur",
+		"imgRelativePath": ""
+	},
+	{
+		"name": "Mariika",
+		"imgRelativePath": ""
 	}
 ]

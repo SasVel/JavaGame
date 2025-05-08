@@ -14,7 +14,7 @@ import com.javaproject.items.ItemsManager;
 
 public class Customer implements Drawable, TypingInputListener {
 	private final long id;
-	private final String name;
+	private final CustomerData data;
 	private final TypePanel typePanel;
 	private final List<Item> items;
 	private int currItemIdx = 0;
@@ -22,19 +22,17 @@ public class Customer implements Drawable, TypingInputListener {
 
 	private List<CustomerDoneListener> listeners = new ArrayList<>();
 
-	private final String imgRelativePath;
 	private BufferedImage image;
 
 	private static long customersNum = 0;
 
-	public Customer(String name, TypePanel _typePanel, ItemsManager itemsManager, String imgRelativePath) {
+	public Customer(CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) {
 		customersNum++;
 		id = customersNum;
 
-		this.name = name;
+		this.data = _data;
 		this.typePanel = _typePanel;
-		this.imgRelativePath = imgRelativePath;
-		this.items = itemsManager.getRandItemsInRange(1, 2);
+		this.items = _itemsManager.getRandItemsInRange(1, 2);
 		this.currItemIdx = 0;
 	}
 
@@ -60,7 +58,7 @@ public class Customer implements Drawable, TypingInputListener {
 	}
 
 	public String getName() {
-		return name;
+		return data.getName();
 	}
 
 	public List<Item> getItems() {
@@ -68,7 +66,7 @@ public class Customer implements Drawable, TypingInputListener {
 	}
 
 	public String getImgRelativePath() {
-		return imgRelativePath;
+		return data.getImgRelativePath();
 	}
 
 	public void addListener(CustomerDoneListener listener) {

@@ -1,10 +1,10 @@
 [
 	{
-		"name": "Health Potion",
-		"desc": "A regular health potion",
-		"price": "6.99",
+		"name": "Health Vial",
+		"desc": "A small health potion",
+		"price": "3.99",
 		"difficulty": "1",
-		"imgPathRelative": "/data/ItemImages/HealthPotion.png"
+		"imgPathRelative": "/data/ItemImages/HealthVial.png"
 	},
 	{
 		"name": "Health Potion",

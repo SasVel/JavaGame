@@ -12,12 +12,12 @@ import java.util.List;
 public class TextLabel {
 
 	public List<String> textList = new ArrayList<>();
-	public int x = 200;
-	public int y = 200;
+	private int x = 200;
+	private int y = 200;
 
-	private Font font;
+	private static Font font;
 	private Color color;
-	private int fontSize = 45;
+	private int fontSize = 40;
 
 	public TextLabel(Color color) {
 		try {
@@ -26,6 +26,30 @@ public class TextLabel {
 			this.color = color;
 		} 
 		catch (FontFormatException | IOException e) { e.printStackTrace(); }
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getFontSize() {
+		return fontSize;
+	}
+
+	public void setFontSize(int fontSize) {
+		this.fontSize = fontSize;
 	}
 
 	public void draw(Graphics2D g) {

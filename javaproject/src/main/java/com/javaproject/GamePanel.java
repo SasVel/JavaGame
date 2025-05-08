@@ -1,22 +1,26 @@
 package com.javaproject;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.javaproject.UI.TypePanel;
+import com.javaproject.customers.CustomersManager;
 import com.javaproject.items.ItemsManager;
 import com.javaproject.sound.SoundManager;
 
 public final class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS
 	//120 for 1920x1080
+	//current is 1600x900
 	final int tileSize = 100;
 	final int screenAspectX = 16;
 	final int screenAspectY = 9;
@@ -35,10 +39,14 @@ public final class GamePanel extends JPanel implements Runnable{
 	ItemsManager itemsManager = new ItemsManager();
 	
 	TypePanel typePanel = new TypePanel(inputManager, soundManager);
+	CustomersManager customersManager = new CustomersManager(typePanel, itemsManager);
 
 
-	GameController gameController = new GameController(typePanel, itemsManager);
+	GameController gameController = new GameController(typePanel, itemsManager, customersManager);
 	private Graphics2D graphics;
+
+	//Resources
+	BufferedImage backgroundImage;
 
 	public GamePanel() {
 		super();
@@ -52,10 +60,15 @@ public final class GamePanel extends JPanel implements Runnable{
 
 	public void configure() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.BLACK);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(inputManager);
 		this.setFocusable(true);
+
+		try {
+			backgroundImage = ImageIO.read(getClass().getResource("/data/Background/BG.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void startGameThread() {
@@ -101,8 +114,12 @@ public final class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		graphics = (Graphics2D)g;
-		
+		graphics.drawImage(backgroundImage, 0, 0, null);
+
 		gameController.draw(graphics);
+		
+		// graphics.setColor(new Color(110, 39, 39));
+		// graphics.fillRect(0, (screenHeight / 5) * 4, screenWidth, screenHeight / 5);
 
 		graphics.dispose();
 	}

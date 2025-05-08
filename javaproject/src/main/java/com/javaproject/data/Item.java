@@ -73,7 +73,7 @@ public class Item implements Drawable{
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.drawImage(image, 1000, 600, null);
+		g.drawImage(image, 280, 600, null);
 	}
 
 	

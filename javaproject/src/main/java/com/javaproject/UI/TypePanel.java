@@ -3,8 +3,11 @@ package com.javaproject.UI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.javaproject.InputManager;
@@ -20,7 +23,11 @@ public class TypePanel extends JPanel implements Drawable {
 	InputManager inputManager;
 	SoundManager soundManager;
 
-	Color bg = Color.MAGENTA;
+	public final int x = 800;
+	public final int y = 400;
+
+	//Resources
+	BufferedImage typewriterBG;
 
 	public TypePanel(InputManager _inputManager, SoundManager _soundManager) {
 		super(new BorderLayout());
@@ -28,11 +35,25 @@ public class TypePanel extends JPanel implements Drawable {
 		soundManager = _soundManager;
 
 		initComponenets();
+
+		try {
+			typewriterBG = ImageIO.read(getClass().getResource("/data/Props/Typewriter.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initComponenets() {
 		displayLabel = new TypeDisplayLabel(Color.gray);
-		inputLabel = new TypeInputLabel(Color.white, inputManager, soundManager);
+		inputLabel = new TypeInputLabel(Color.black, inputManager, soundManager);
+
+		int textX = x + 210;
+		int textY = y + 25;
+		displayLabel.setX(textX);
+		displayLabel.setY(textY);
+
+		inputLabel.setX(textX);
+		inputLabel.setY(textY);
 	}
 	
 	public void update() {
@@ -41,8 +62,7 @@ public class TypePanel extends JPanel implements Drawable {
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.setColor(bg);
-		g.fillRect(0, 0, 320, 320);
+		g.drawImage(typewriterBG, x, y, null);
 
 		displayLabel.draw(g);
 		inputLabel.draw(g);

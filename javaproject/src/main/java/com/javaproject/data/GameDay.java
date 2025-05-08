@@ -1,41 +1,50 @@
 package com.javaproject.data;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.javaproject.UI.TextLabel;
 import com.javaproject.UI.TypePanel;
+import com.javaproject.customers.CustomersManager;
 import com.javaproject.interfaces.CustomerDoneListener;
 import com.javaproject.interfaces.DayDoneListener;
 import com.javaproject.interfaces.Drawable;
 import com.javaproject.items.ItemsManager;
 
 public class GameDay implements Drawable, CustomerDoneListener{
-
-	private Random rand = new Random();
-	private TypePanel typePanel;
-
 	private final long id;
 	private List<Customer> customers = new ArrayList<>();
 	private int currCustomerIdx = 0;
 	private Customer currCustomer;
-
-	private static long passedDays = 0;
-
-	private List<DayDoneListener> listeners = new ArrayList<>();
 	
-	public GameDay(TypePanel _typePanel, ItemsManager items) {
+	private static long passedDays = 0;
+	
+	private TypePanel typePanel;
+	private Random rand = new Random();
+	private List<DayDoneListener> listeners = new ArrayList<>();
+
+	private TextLabel dayLabel;
+	
+	public GameDay(TypePanel _typePanel, ItemsManager _items, CustomersManager customersManager) {
 		passedDays++;
 		id = passedDays;
 		typePanel = _typePanel;
 
-		for (int i = 0; i < rand.nextInt(3, 6); i++) {
-			Customer newCustomer = new Customer("Goshko", typePanel, items, null);
-			this.customers.add(newCustomer);
-		}
+		this.customers.addAll(customersManager.getRandCustomersInRange(2, 6));
 		
 		setActiveCustomer(currCustomerIdx);
+		configDayLabel();
+	}
+
+	private void configDayLabel() {
+		dayLabel = new TextLabel(Color.white);
+		dayLabel.setFontSize(75);
+		dayLabel.setX(750);
+		dayLabel.setY(-10);
+		dayLabel.textList.add("Day " + id);
 	}
 
 	public long getId() {
@@ -91,6 +100,9 @@ public class GameDay implements Drawable, CustomerDoneListener{
 
 	@Override
 	public void draw(Graphics2D g) {
+		g.setColor(new Color(36, 26, 1, 100));
+		g.fillRect(0, 0, 1600, 100);
+		dayLabel.draw(g);
 		currCustomer.draw(g);
 	}
 }
