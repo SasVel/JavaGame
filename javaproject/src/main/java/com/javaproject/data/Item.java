@@ -1,80 +1,61 @@
 package com.javaproject.data;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.javaproject.interfaces.Drawable;
+import com.javaproject.DrawableObject;
+import com.javaproject.UI.TextLabel;
 
-public class Item implements Drawable{
+public class Item extends DrawableObject{
 	private final long id;
-	private final String name;
-	private final String desc;
-	private final double price;
-	private final short difficulty;
-	private final String imgPathRelative;
-	private BufferedImage image;
+
+	public ItemData data;
+	private final TextLabel titleLabel = new TextLabel(Color.WHITE, 34);
+	private final TextLabel descLabel = new TextLabel(Color.WHITE, 25);
 
 	private static long numOfItems = 0;
-	
+
 	@JsonCreator
-	public Item(
-		@JsonProperty("name") String name, 
-		@JsonProperty("desc") String desc, 
-		@JsonProperty("price") float price, 
-		@JsonProperty("difficulty") short difficulty, 
-		@JsonProperty("imgPathRelative") String imgPathRelative) {
+	public Item(int _width, int _height, int _posX, int _posY, ItemData _data) {
+		super(_width, _height, _posX, _posY, _data);
 		
+		this.data = _data;
 		numOfItems++;
 		this.id = numOfItems;
-		this.name = name;
-		this.desc = desc;
-		this.price = price;
-		this.difficulty = difficulty;
-		this.imgPathRelative = imgPathRelative;
 
-		try {
-			URL url = getClass().getResource(imgPathRelative);
-			image = ImageIO.read(url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		configTitleLabel();
+		configDescLabel();
+	}
+
+	private void configTitleLabel() {
+		titleLabel.setX(PosX + Width + 20);
+		titleLabel.setY(PosY);
+		titleLabel.addToText(data.getName());
+	}
+
+	private void configDescLabel() {
+		descLabel.setX(PosX + Width + 20);
+		descLabel.setY(PosY + 50);
+		descLabel.isAutowrap = true;
+		descLabel.addToText(data.getDesc());
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
-	public String getDesc() {
-		return desc;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public short getDifficulty() {
-		return difficulty;
-	}
-	public String getImgPathRelative() {
-		return imgPathRelative;
-	}
-
 	@Override
 	public String toString() {
-		return String.format("%s - %s", this.getName(), String.format("%.2f", this.getPrice()));
+		return String.format("%s - %s", this.data.getName(), String.format("%.2f", this.data.getPrice()));
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.drawImage(image, 280, 600, null);
+		g.setColor(new Color(0, 0, 0, 150));
+		g.fillRect(0, PosY - 30, Width * 3, Height + 50);
+		super.draw(g);
+		titleLabel.draw(g);
+		descLabel.draw(g);
 	}
-
-	
 }

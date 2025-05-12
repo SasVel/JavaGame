@@ -8,23 +8,24 @@ import java.util.Random;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaproject.data.Item;
+import com.javaproject.data.ItemData;
 
 public class ItemsManager {
 	
 	Random rand = new Random();
 	ObjectMapper mapper = new ObjectMapper();
-	private List<Item> items;
+	private List<ItemData> itemsData;
 	
 	public ItemsManager() {
 		try {
-			items = mapper.readValue(getClass().getResource("/data/items.json"), new TypeReference<List<Item>>() {});
+			itemsData = mapper.readValue(getClass().getResource("/data/items.json"), new TypeReference<List<ItemData>>() {});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public List<Item> getAllItems() {
-		return items;
+	public List<ItemData> getAllItemsData() {
+		return itemsData;
 	}
 
 	public List<Item> getRandItemsInRange(int lower, int upper) {
@@ -32,15 +33,7 @@ public class ItemsManager {
 
 		List<Item> resItems = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			resItems.add(items.get(rand.nextInt(items.size() - 1)));
-		}
-		return resItems;
-	}
-
-	public List<Item> getItemsByDifficulty(short difficulty) {
-		List<Item> resItems = new ArrayList<>();
-		for (Item item : items) {
-			if (item.getDifficulty() == difficulty) resItems.add(item);
+			resItems.add(new Item(250, 250, 100, 600, itemsData.get(rand.nextInt(itemsData.size() - 1))));
 		}
 		return resItems;
 	}

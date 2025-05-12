@@ -1,20 +1,18 @@
 package com.javaproject.data;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.javaproject.DrawableObject;
 import com.javaproject.UI.TypePanel;
 import com.javaproject.interfaces.CustomerDoneListener;
-import com.javaproject.interfaces.Drawable;
 import com.javaproject.interfaces.TypingInputListener;
 import com.javaproject.items.ItemsManager;
 
-public class Customer implements Drawable, TypingInputListener {
+public class Customer extends DrawableObject implements TypingInputListener {
 	private final long id;
-	private final CustomerData data;
+	protected CustomerData data;
 	private final TypePanel typePanel;
 	private final List<Item> items;
 	private int currItemIdx = 0;
@@ -22,11 +20,10 @@ public class Customer implements Drawable, TypingInputListener {
 
 	private List<CustomerDoneListener> listeners = new ArrayList<>();
 
-	private BufferedImage image;
-
 	private static long customersNum = 0;
 
-	public Customer(CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) {
+	public Customer(int _width, int _height, int _posX, int _posY, CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) {
+		super(_width, _height, _posX, _posY, _data);
 		customersNum++;
 		id = customersNum;
 
@@ -64,7 +61,7 @@ public class Customer implements Drawable, TypingInputListener {
 	}
 
 	public String getImgRelativePath() {
-		return data.getImgRelativePath();
+		return data.getImgPathRelative();
 	}
 
 	public void addListener(CustomerDoneListener listener) {
@@ -73,8 +70,7 @@ public class Customer implements Drawable, TypingInputListener {
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.setColor(Color.green);
-		g.fillRect(500, 500, 200, 600);
+		super.draw(g);
 
 		currItem.draw(g);
 		typePanel.draw(g);

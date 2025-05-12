@@ -21,6 +21,8 @@ public class TextLabel {
 	private int lineSeperation = 5;
 
 	protected String seperator = "----------------";
+	public boolean isAutowrap = false;
+	public int autowrapCharNum = 25;
 
 	public TextLabel(Color color, float _fontSize) {
 		try {
@@ -30,6 +32,26 @@ public class TextLabel {
 			fontSize = _fontSize;
 		} 
 		catch (FontFormatException | IOException e) { e.printStackTrace(); }
+	}
+
+	public List<String> getTextList() {
+		return textList;
+	}
+
+	public void setTextList(List<String> textList) {
+		this.textList = textList;
+	}
+
+	public void addToText(String text) {
+		if (isAutowrap && text.length() > autowrapCharNum) {
+			while (text != "") {
+				String croppedText = text.substring(0, Math.min(autowrapCharNum, text.length()));
+				textList.add(croppedText);
+				text = text.replace(croppedText, "");
+			}
+		} else {
+			textList.add(text);
+		}
 	}
 
 	public int getX() {

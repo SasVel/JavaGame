@@ -1,14 +1,18 @@
 [
 	{
 		"name": "Goshko",
-		"imgRelativePath": ""
+		"Occupation": "Guard"
 	},
 	{
 		"name": "Petur",
-		"imgRelativePath": ""
+		"Occupation": "Hunter"
 	},
 	{
-		"name": "Mariika",
-		"imgRelativePath": ""
+		"name": "Baba Mariika",
+		"Occupation": "Baker"
+	},
+	{
+		"name": "Vanko",
+		"Occupation": "Adventurer"
 	}
 ]

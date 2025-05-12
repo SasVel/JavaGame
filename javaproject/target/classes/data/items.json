@@ -1,30 +1,134 @@
 [
 	{
-		"name": "Health Vial",
-		"desc": "A small health potion",
-		"price": "3.99",
-		"difficulty": "1",
-		"imgPathRelative": "/data/ItemImages/HealthVial.png"
+		"name": "Ember Root",
+		"desc": "Rare roots used as a potent fire starter.",
+		"price": "12.50",
+		"difficulty": "1"
 	},
 	{
-		"name": "Swiftness Vial",
-		"desc": "A small swiftness potion",
-		"price": "4.50",
-		"difficulty": "1",
-		"imgPathRelative": "/data/ItemImages/SwiftnessVial.png"
+		"name": "Sweet Rosehip",
+		"desc": "Rosehip of the sweet variety.",
+		"price": "1.50",
+		"difficulty": "1"
 	},
 	{
-		"name": "Constitution Vial",
-		"desc": "A small constitution potion",
-		"price": "5.45",
-		"difficulty": "1",
-		"imgPathRelative": "/data/ItemImages/ConstitutionVial.png"
+		"name": "Dragon Claw",
+		"desc": "Fallen claw of a dragon.",
+		"price": "8.45",
+		"difficulty": "1"
 	},
 	{
-		"name": "Health Potion",
-		"desc": "A regular health potion",
-		"price": "6.99",
-		"difficulty": "1",
-		"imgPathRelative": "/data/ItemImages/HealthPotion.png"
+		"name": "Humanoid Skull",
+		"desc": "You aren't skilled enough to identify it.",
+		"price": "5.99",
+		"difficulty": "1"
+	},
+	{
+		"name": "Windigo Skull",
+		"desc": "Feels a little cursed.",
+		"price": "8.99",
+		"difficulty": "1"
+	},
+	{
+		"name": "Dragon Scales",
+		"desc": "Shiny and strong!",
+		"price": "15.20",
+		"difficulty": "1"
+	},
+	{
+		"name": "Random Bones",
+		"desc": "Pretty mysterious I guess.",
+		"price": "2.99",
+		"difficulty": "1"
+	},
+	{
+		"name": "Ember Bug",
+		"desc": "A really cool birthday present.",
+		"price": "8.50",
+		"difficulty": "1"
+	},
+	{
+		"name": "Wolf Hide",
+		"desc": "Really cozy if you dont have a dog.",
+		"price": "10.35",
+		"difficulty": "1"
+	},
+	{
+		"name": "Mystery Steak",
+		"desc": "At least it's cheap.",
+		"price": "2.50",
+		"difficulty": "1"
+	},
+	{
+		"name": "Giant Salmon Steak",
+		"desc": "Now that's a meal!",
+		"price": "12.50",
+		"difficulty": "1"
+	},
+	{
+		"name": "Cool Feather",
+		"desc": "You can put it on your hat! Or write with it!",
+		"price": "4.99",
+		"difficulty": "1"
+	},
+	{
+		"name": "Healing Shrooms",
+		"desc": "They remind you of grandma.",
+		"price": "2.99",
+		"difficulty": "1"
+	},
+	{
+		"name": "Questionable Shrooms",
+		"desc": "Better not ask questions.",
+		"price": "11.25",
+		"difficulty": "1"
+	},
+	{
+		"name": "Deer Antlers",
+		"desc": "Stylish decoration!",
+		"price": "7.50",
+		"difficulty": "1"
+	},
+	{
+		"name": "Fox Tail",
+		"desc": "Brings luck?",
+		"price": "6.30",
+		"difficulty": "1"
+	},
+	{
+		"name": "Blue Moon Weed",
+		"desc": "Reminds you of someone special.",
+		"price": "7.50",
+		"difficulty": "1"
+	},
+	{
+		"name": "Dragon Slices",
+		"desc": "How did you even get those?",
+		"price": "19.99",
+		"difficulty": "1"
+	},
+	{
+		"name": "Mandrake",
+		"desc": "Doesn't scream if you chop his head.",
+		"price": "5.99",
+		"difficulty": "1"
+	},
+	{
+		"name": "Fire Blossom",
+		"desc": "Always warm to the touch.",
+		"price": "12.50",
+		"difficulty": "1"
+	},
+	{
+		"name": "Cyclops Eye",
+		"desc": "Creepy.",
+		"price": "15.00",
+		"difficulty": "1"
+	},
+	{
+		"name": "Dragon Tail",
+		"desc": "Piece by piece, could you build a dragon?",
+		"price": "15.50",
+		"difficulty": "1"
 	}
 ]

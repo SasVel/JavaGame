@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaproject.UI.TypePanel;
 import com.javaproject.data.Customer;
 import com.javaproject.data.CustomerData;
-import com.javaproject.data.Item;
 import com.javaproject.items.ItemsManager;
 
 public class CustomersManager {
@@ -44,7 +43,7 @@ public class CustomersManager {
 	}
 
 	private Customer getNewRandCustomer() {
-		return new Customer(getRandCustomerData(), typePanel, itemsManager);
+		return new Customer(450, 800, 350, 300, getRandCustomerData(), typePanel, itemsManager);
 	}
 
 	public List<CustomerData> getRandCustomerDataInRange(int lower, int upper) {
