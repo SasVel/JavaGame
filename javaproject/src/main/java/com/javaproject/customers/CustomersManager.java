@@ -37,7 +37,6 @@ public class CustomersManager {
 		return customersData;
 	}
 
-
 	private CustomerData getRandCustomerData() {
 		return customersData.get(rand.nextInt(customersData.size() - 1));
 	}

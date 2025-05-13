@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+import com.javaproject.UI.MoneyTracker;
 import com.javaproject.UI.TextLabel;
-import com.javaproject.UI.TypePanel;
 import com.javaproject.customers.CustomersManager;
 import com.javaproject.interfaces.CustomerDoneListener;
 import com.javaproject.interfaces.DayDoneListener;
@@ -22,16 +21,15 @@ public class GameDay implements Drawable, CustomerDoneListener{
 	
 	private static long passedDays = 0;
 	
-	private TypePanel typePanel;
-	private Random rand = new Random();
 	private List<DayDoneListener> listeners = new ArrayList<>();
 
 	private TextLabel dayLabel;
+	private final MoneyTracker moneyTracker;
 	
-	public GameDay(TypePanel _typePanel, ItemsManager _items, CustomersManager customersManager) {
+	public GameDay(ItemsManager _items, CustomersManager customersManager, MoneyTracker _moneyTracker) {
 		passedDays++;
 		id = passedDays;
-		typePanel = _typePanel;
+		moneyTracker = _moneyTracker;
 
 		this.customers.addAll(customersManager.getRandCustomersInRange(2, 6));
 		
@@ -88,6 +86,7 @@ public class GameDay implements Drawable, CustomerDoneListener{
 
 	@Override
 	public void customerDone() {
+		addMoney(customers.get(currCustomerIdx).getPriceCombined() * 0.2d);
 		currCustomerIdx++;
 		if (currCustomerIdx >= customers.size() - 1) {
 			dayFinished();
@@ -95,6 +94,10 @@ public class GameDay implements Drawable, CustomerDoneListener{
 		}
 
 		setActiveCustomer(currCustomerIdx);
+	}
+
+	private void addMoney(double money) {
+		moneyTracker.addToAmmount(money);
 	}
 
 	@Override

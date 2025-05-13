@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import com.javaproject.UI.TypePanel;
 import com.javaproject.customers.CustomersManager;
+import com.javaproject.data.CurrencyData;
 import com.javaproject.items.ItemsManager;
 import com.javaproject.sound.SoundManager;
 
@@ -34,6 +35,8 @@ public final class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
+
+	CurrencyData gameData = new CurrencyData();
 	InputManager inputManager = new InputManager();
 	SoundManager soundManager = new SoundManager();
 	ItemsManager itemsManager = new ItemsManager();
@@ -42,7 +45,7 @@ public final class GamePanel extends JPanel implements Runnable{
 	CustomersManager customersManager = new CustomersManager(typePanel, itemsManager);
 
 
-	GameController gameController = new GameController(typePanel, itemsManager, customersManager);
+	GameController gameController = new GameController(itemsManager, customersManager, gameData);
 	private Graphics2D graphics;
 
 	//Resources
@@ -80,7 +83,7 @@ public final class GamePanel extends JPanel implements Runnable{
 	public void run() {
 		onStart();
 
-		double drawInterval = 1000000000/FPS;
+		double drawInterval = 1000000000 / FPS;
 		double delta = 0;
 		long lastTime = System.nanoTime();
 		long currentTime;

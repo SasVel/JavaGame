@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javaproject.data.CurrencyData;
 import com.javaproject.data.Item;
 import com.javaproject.data.ItemData;
 

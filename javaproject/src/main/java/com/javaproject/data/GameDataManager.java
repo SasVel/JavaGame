@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GameDataManager {
 	ObjectMapper mapper = new ObjectMapper();
-	public GameData gameData;
+	public CurrencyData gameData;
 
 	public GameDataManager() {
 		try {
-			gameData = mapper.readValue(getClass().getResource("/data/gameData.json"), GameData.class);
+			gameData = mapper.readValue(getClass().getResource("/data/gameData.json"), CurrencyData.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

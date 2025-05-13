@@ -100,4 +100,12 @@ public class Customer extends DrawableObject implements TypingInputListener {
 	public void textCompleted() {
 		customerDone();
 	}
+
+	public double getPriceCombined() {
+		double res = 0;
+		for (Item item : items) {
+			res += item.data.getPrice();
+		}
+		return res;
+	}
 }
