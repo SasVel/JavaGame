@@ -2,7 +2,7 @@ package com.javaproject;
 
 import org.junit.*;
 
-import com.javaproject.customers.CustomersManager;
+import com.javaproject.managers.CustomersManager;
 
 public class CustomersManagerTest {
 

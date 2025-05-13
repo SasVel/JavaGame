@@ -1,4 +1,4 @@
-package com.javaproject.sound;
+package com.javaproject.managers;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package com.javaproject;
+package com.javaproject.models;
 
 import java.awt.Graphics2D;
 import java.awt.Image;

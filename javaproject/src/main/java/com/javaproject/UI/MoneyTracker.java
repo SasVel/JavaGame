@@ -3,8 +3,8 @@ package com.javaproject.UI;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import com.javaproject.DrawableObject;
 import com.javaproject.data.CurrencyData;
+import com.javaproject.models.DrawableObject;
 
 public class MoneyTracker extends DrawableObject {
 	private final CurrencyData data;

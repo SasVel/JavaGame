@@ -1,4 +1,4 @@
-package com.javaproject.customers;
+package com.javaproject.managers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,9 +8,8 @@ import java.util.Random;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaproject.UI.TypePanel;
-import com.javaproject.data.Customer;
 import com.javaproject.data.CustomerData;
-import com.javaproject.items.ItemsManager;
+import com.javaproject.models.Customer;
 
 public class CustomersManager {
 	

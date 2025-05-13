@@ -5,10 +5,10 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javaproject.InputManager;
 import com.javaproject.interfaces.TypingInputListener;
-import com.javaproject.sound.SoundManager;
-import com.javaproject.sound.SoundManager.SoundTypes;
+import com.javaproject.managers.InputManager;
+import com.javaproject.managers.SoundManager;
+import com.javaproject.managers.SoundManager.SoundTypes;
 
 public class TypeInputLabel extends TextLabel {
 

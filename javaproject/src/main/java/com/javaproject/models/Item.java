@@ -1,11 +1,11 @@
-package com.javaproject.data;
+package com.javaproject.models;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.javaproject.DrawableObject;
 import com.javaproject.UI.TextLabel;
+import com.javaproject.data.ItemData;
 
 public class Item extends DrawableObject{
 	private final long id;

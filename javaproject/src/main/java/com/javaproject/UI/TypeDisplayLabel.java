@@ -3,7 +3,7 @@ package com.javaproject.UI;
 import java.awt.Color;
 import java.util.List;
 
-import com.javaproject.data.Item;
+import com.javaproject.models.Item;
 
 public class TypeDisplayLabel extends TextLabel {
 

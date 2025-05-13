@@ -1,14 +1,14 @@
-package com.javaproject.data;
+package com.javaproject.models;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javaproject.DrawableObject;
 import com.javaproject.UI.TypePanel;
+import com.javaproject.data.CustomerData;
 import com.javaproject.interfaces.CustomerDoneListener;
 import com.javaproject.interfaces.TypingInputListener;
-import com.javaproject.items.ItemsManager;
+import com.javaproject.managers.ItemsManager;
 
 public class Customer extends DrawableObject implements TypingInputListener {
 	private final long id;

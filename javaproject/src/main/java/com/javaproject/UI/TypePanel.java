@@ -10,10 +10,10 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import com.javaproject.InputManager;
-import com.javaproject.data.Item;
 import com.javaproject.interfaces.Drawable;
-import com.javaproject.sound.SoundManager;
+import com.javaproject.managers.InputManager;
+import com.javaproject.managers.SoundManager;
+import com.javaproject.models.Item;
 
 public class TypePanel extends JPanel implements Drawable {
 

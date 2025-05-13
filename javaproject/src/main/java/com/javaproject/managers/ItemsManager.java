@@ -1,4 +1,4 @@
-package com.javaproject.items;
+package com.javaproject.managers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,9 +7,8 @@ import java.util.Random;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javaproject.data.CurrencyData;
-import com.javaproject.data.Item;
 import com.javaproject.data.ItemData;
+import com.javaproject.models.Item;
 
 public class ItemsManager {
 	
@@ -25,6 +24,10 @@ public class ItemsManager {
 		}
 	}
 
+	public Item getItem(ItemData data) {
+		return new Item(250, 250, 100, 600, data);
+	}
+
 	public List<ItemData> getAllItemsData() {
 		return itemsData;
 	}
@@ -34,7 +37,7 @@ public class ItemsManager {
 
 		List<Item> resItems = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			resItems.add(new Item(250, 250, 100, 600, itemsData.get(rand.nextInt(itemsData.size() - 1))));
+			resItems.add(getItem(itemsData.get(rand.nextInt(itemsData.size() - 1))));
 		}
 		return resItems;
 	}

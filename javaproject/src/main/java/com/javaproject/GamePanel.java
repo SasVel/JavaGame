@@ -13,10 +13,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.javaproject.UI.TypePanel;
-import com.javaproject.customers.CustomersManager;
 import com.javaproject.data.CurrencyData;
-import com.javaproject.items.ItemsManager;
-import com.javaproject.sound.SoundManager;
+import com.javaproject.managers.CustomersManager;
+import com.javaproject.managers.GameController;
+import com.javaproject.managers.InputManager;
+import com.javaproject.managers.ItemsManager;
+import com.javaproject.managers.SoundManager;
 
 public final class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS

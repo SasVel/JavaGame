@@ -1,8 +1,9 @@
-package com.javaproject.data;
+package com.javaproject.managers;
 
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javaproject.data.CurrencyData;
 
 public class GameDataManager {
 	ObjectMapper mapper = new ObjectMapper();

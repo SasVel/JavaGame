@@ -1,14 +1,12 @@
-package com.javaproject;
+package com.javaproject.managers;
 
 import java.awt.Graphics2D;
 
 import com.javaproject.UI.MoneyTracker;
-import com.javaproject.customers.CustomersManager;
 import com.javaproject.data.CurrencyData;
-import com.javaproject.data.GameDay;
 import com.javaproject.interfaces.DayDoneListener;
 import com.javaproject.interfaces.Drawable;
-import com.javaproject.items.ItemsManager;
+import com.javaproject.models.GameDay;
 
 public final class GameController implements Drawable, DayDoneListener{
 

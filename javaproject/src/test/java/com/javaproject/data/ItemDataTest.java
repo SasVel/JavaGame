@@ -1,10 +1,17 @@
 package com.javaproject.data;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ItemDataTest {
 	static ItemData data = new ItemData("Ember Root", "Rare roots used as a potent fire starter.", (double)12.5, (short)1);
+	static ObjectMapper mapper = new ObjectMapper();
 
 	@Test
 	public void testGetName() {
@@ -37,5 +44,17 @@ public class ItemDataTest {
 		String actual = data.getImgPathRelative();
 
 		Assert.assertEquals(expected , actual);
+	}
+
+
+	@Test
+	public void testDataLoading() {
+		List<ItemData> itemData;
+		try {
+			itemData = mapper.readValue(getClass().getResource("/data/items.json"), new TypeReference<List<ItemData>>() {});
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
+		Assert.assertTrue(true);
 	}
 }

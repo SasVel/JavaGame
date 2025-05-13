@@ -1,19 +1,19 @@
-package com.javaproject.data;
+package com.javaproject.models;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javaproject.Timer;
 import com.javaproject.UI.MoneyTracker;
 import com.javaproject.UI.TextLabel;
-import com.javaproject.customers.CustomersManager;
 import com.javaproject.interfaces.CustomerDoneListener;
 import com.javaproject.interfaces.DayDoneListener;
 import com.javaproject.interfaces.Drawable;
 import com.javaproject.interfaces.TimerListener;
-import com.javaproject.items.ItemsManager;
+import com.javaproject.managers.CustomersManager;
+import com.javaproject.managers.ItemsManager;
+import com.javaproject.util.Timer;
 
 public class GameDay implements Drawable, CustomerDoneListener, TimerListener{
 	private final long id;
@@ -142,6 +142,4 @@ public class GameDay implements Drawable, CustomerDoneListener, TimerListener{
 		g.setColor(color);
 		g.fillOval(x - radius, y - radius, diameter, diameter); 
 	}
-
-
 }
