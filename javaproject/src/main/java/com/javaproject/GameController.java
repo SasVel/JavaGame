@@ -46,6 +46,10 @@ public final class GameController implements Drawable, DayDoneListener{
 		startNewDay();
 	}
 
+	public void update(double delta) {
+		currentDay.update(delta);
+	}
+
 	@Override
 	public void draw(Graphics2D g) {
 		currentDay.draw(g);

@@ -18,7 +18,7 @@ public class MoneyTracker extends DrawableObject {
 	}
 
 	private void configCoinLabel() {
-		coinLabel.setX(PosX - 65);
+		coinLabel.setX(PosX - 80);
 		coinLabel.setY(PosY + 20);
 		coinLabel.textList.add("0");
 	}

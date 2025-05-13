@@ -96,7 +96,7 @@ public final class GamePanel extends JPanel implements Runnable{
 			//Actual game loop
 			if (delta >= 1) {
 
-				update();
+				update(delta);
 				repaint();
 
 				delta--;
@@ -109,7 +109,8 @@ public final class GamePanel extends JPanel implements Runnable{
 		this.add(typePanel, BorderLayout.EAST);
 	}
 
-	public void update() {
+	public void update(double delta) {
+		gameController.update(delta);
 		typePanel.update();
 	}
 

@@ -5,15 +5,17 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.javaproject.Timer;
 import com.javaproject.UI.MoneyTracker;
 import com.javaproject.UI.TextLabel;
 import com.javaproject.customers.CustomersManager;
 import com.javaproject.interfaces.CustomerDoneListener;
 import com.javaproject.interfaces.DayDoneListener;
 import com.javaproject.interfaces.Drawable;
+import com.javaproject.interfaces.TimerListener;
 import com.javaproject.items.ItemsManager;
 
-public class GameDay implements Drawable, CustomerDoneListener{
+public class GameDay implements Drawable, CustomerDoneListener, TimerListener{
 	private final long id;
 	private List<Customer> customers = new ArrayList<>();
 	private int currCustomerIdx = 0;
@@ -25,22 +27,26 @@ public class GameDay implements Drawable, CustomerDoneListener{
 
 	private TextLabel dayLabel;
 	private final MoneyTracker moneyTracker;
+	private Timer dayTimer = new Timer(60 * 5);
 	
 	public GameDay(ItemsManager _items, CustomersManager customersManager, MoneyTracker _moneyTracker) {
 		passedDays++;
 		id = passedDays;
 		moneyTracker = _moneyTracker;
 
-		this.customers.addAll(customersManager.getRandCustomersInRange(2, 6));
+		this.customers.addAll(customersManager.getRandCustomersInRange(6, 8));
 		
 		setActiveCustomer(currCustomerIdx);
 		configDayLabel();
+
+		dayTimer.addListener(this);
+		dayTimer.start();
 	}
 
 	private void configDayLabel() {
 		dayLabel = new TextLabel(Color.white, 65);
 		dayLabel.setX(750);
-		dayLabel.setY(-10);
+		dayLabel.setY(0);
 		dayLabel.textList.add("Day " + id);
 	}
 
@@ -96,8 +102,17 @@ public class GameDay implements Drawable, CustomerDoneListener{
 		setActiveCustomer(currCustomerIdx);
 	}
 
+	@Override
+	public void onTimeout() {
+		dayFinished();
+	}
+
 	private void addMoney(double money) {
 		moneyTracker.addToAmmount(money);
+	}
+
+	public void update(double delta) {
+		dayTimer.update(delta);
 	}
 
 	@Override
@@ -105,6 +120,28 @@ public class GameDay implements Drawable, CustomerDoneListener{
 		g.setColor(new Color(36, 26, 1, 100));
 		g.fillRect(0, 0, 1600, 100);
 		dayLabel.draw(g);
+		drawDayTimer(g, dayLabel.getX() - 80, dayLabel.getY() + 50);
 		currCustomer.draw(g);
 	}
+
+	private void drawDayTimer(Graphics2D g, int posX, int posY) {
+		float timerDonePercent = dayTimer.donePercent();
+
+		fillCircle(g, Color.BLUE, posX, posY, (int)(timerDonePercent * 40));
+		drawCircle(g, Color.WHITE, posX, posY, 40);
+	}
+
+	public static void drawCircle(Graphics2D g, Color color, int x, int y, int radius) {
+		int diameter = radius * 2;
+		g.setColor(color);
+		g.drawOval(x - radius, y - radius, diameter, diameter); 
+	}
+
+	public static void fillCircle(Graphics2D g, Color color, int x, int y, int radius) {
+		int diameter = radius * 2;
+		g.setColor(color);
+		g.fillOval(x - radius, y - radius, diameter, diameter); 
+	}
+
+
 }
