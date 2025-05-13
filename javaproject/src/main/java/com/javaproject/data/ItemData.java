@@ -16,7 +16,7 @@ public class ItemData implements ObjectData{
 	public ItemData(
 		@JsonProperty("name") String name, 
 		@JsonProperty("desc") String desc, 
-		@JsonProperty("price") float price, 
+		@JsonProperty("price") double price, 
 		@JsonProperty("difficulty") short difficulty) {
 		
 		this.name = name;
