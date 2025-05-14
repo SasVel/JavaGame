@@ -35,6 +35,6 @@ public class MoneyTracker extends DrawableObject {
 
 	public void addToAmmount(double money) {
 		data.setCurrency(data.getCurrency() + money);
-		updateLabel(money);
+		updateLabel(data.getCurrency());
 	}
 }

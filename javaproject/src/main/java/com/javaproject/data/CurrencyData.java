@@ -3,7 +3,7 @@ package com.javaproject.data;
 import com.javaproject.interfaces.ObjectData;
 
 public class CurrencyData implements ObjectData{
-	private double currency;
+	private double currency = 0;
 
 	public double getCurrency() {
 		return currency;
