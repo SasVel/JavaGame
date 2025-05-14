@@ -1,18 +1,20 @@
 package com.javaproject.UI;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.javaproject.interfaces.TimerListener;
 import com.javaproject.interfaces.TypingInputListener;
+import com.javaproject.interfaces.Updateable;
 import com.javaproject.managers.InputManager;
 import com.javaproject.managers.SoundManager;
 import com.javaproject.managers.SoundManager.SoundTypes;
 import com.javaproject.util.Timer;
 
-public class TypeInputLabel extends TextLabel implements TimerListener {
+public class TypeInputLabel extends TextLabel implements Updateable, TimerListener {
 
 	private final InputManager input;
 	private final SoundManager sound;
@@ -24,7 +26,8 @@ public class TypeInputLabel extends TextLabel implements TimerListener {
 
 	private TypingInputListener listener;
 	private Color wrongInputColor = Color.RED;
-	private Timer wrongInputTimer = new Timer(0.3);
+	private final Timer wrongInputTimer = new Timer(0.3);
+	private final InputIndicator indicator = new InputIndicator(this);
 
 	public TypeInputLabel(Color color, int _fontSize, InputManager inputManager, SoundManager soundManager) {
 		super(color, _fontSize);
@@ -32,6 +35,20 @@ public class TypeInputLabel extends TextLabel implements TimerListener {
 		sound = soundManager;
 
 		wrongInputTimer.addListener(this);
+		indicator.updateRelativeToText();
+	}
+
+	public int getCurrIdx() {
+		return currIdx;
+	}
+
+	public int getCurrLine() {
+		return currLine;
+	}
+
+	public boolean isEndOfLine() {
+		String currLineStr = expectedTextList.get(currLine);
+		return currIdx >= currLineStr.length();
 	}
 
 	public void loadTextList(List<String> list) {
@@ -42,15 +59,17 @@ public class TypeInputLabel extends TextLabel implements TimerListener {
 		}
 	}
 	
+	@Override
 	public void update(double delta) {
 		wrongInputTimer.update(delta);
+		indicator.update(delta);
 
 		if (input.currentState != InputManager.state.Pressed && !isTextCompleted) return;
 
 		char keyChar = (char)input.currKeyCode;
 		String currLineStr = expectedTextList.get(currLine);
 
-		if (currIdx >= currLineStr.length()
+		if (isEndOfLine()
 			&& keyChar == KeyEvent.VK_ENTER) {
 			if (currLine + 1 >= expectedTextList.size()) {
 				resetTextBox();
@@ -58,7 +77,8 @@ public class TypeInputLabel extends TextLabel implements TimerListener {
 			} else {
 				setNewLine();
 			}
-			
+
+			indicator.updateRelativeToText();
 			sound.playSound(SoundTypes.EnterKey);
 			input.reset();
 		} else if (currLineStr.length() != currIdx
@@ -73,11 +93,18 @@ public class TypeInputLabel extends TextLabel implements TimerListener {
 				sound.playSound(SoundTypes.TypeKey);
 			}
 			
+			indicator.updateRelativeToText();
 			input.reset();
 		} else {
 			onIncorrectInput();
 			input.reset();
 		}
+	}
+
+	@Override
+	public void draw(Graphics2D g) {
+		super.draw(g);
+		indicator.draw(g);
 	}
 
 	private void onIncorrectInput() {

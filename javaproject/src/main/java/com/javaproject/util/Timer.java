@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javaproject.interfaces.TimerListener;
+import com.javaproject.interfaces.Updateable;
 
 
-public class Timer {
+public class Timer implements Updateable {
 
 	private final double time;
 	private double elapsedTime = 0;
 	private boolean isOn = false;
+	public boolean isRepeating;
 
 	private List<TimerListener> listeners = new ArrayList<>();
 
@@ -51,7 +53,8 @@ public class Timer {
 		for (TimerListener listener : listeners) {
 			listener.onTimeout();
 		}
-		stop();
+		if (!isRepeating) stop();
+		else reset();
 	}
 
 
@@ -59,6 +62,7 @@ public class Timer {
 		listeners.add(listener);
 	}
 
+	@Override
 	public void update(double delta) {
 		if(!isOn) return;
 

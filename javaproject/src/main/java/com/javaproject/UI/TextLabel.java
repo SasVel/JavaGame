@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextLabel {
+import com.javaproject.interfaces.Drawable;
+
+public class TextLabel implements Drawable {
 
 	public List<String> textList = new ArrayList<>();
 	private int x = 200;
@@ -17,14 +19,14 @@ public class TextLabel {
 
 	private Font font;
 	protected Color color;
-	private float fontSize = 40;
+	private int fontSize = 40;
 	private int lineSeperation = 5;
 
 	protected String seperator = "----------------";
 	public boolean isAutowrap = false;
 	public int autowrapCharNum = 25;
 
-	public TextLabel(Color color, float _fontSize) {
+	public TextLabel(Color color, int _fontSize) {
 		try {
 			InputStream is = getClass().getResourceAsStream("/font/SpecialElite.ttf");
 			font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, _fontSize);
@@ -70,7 +72,7 @@ public class TextLabel {
 		this.y = y;
 	}
 
-	public float getFontSize() {
+	public int getFontSize() {
 		return fontSize;
 	}
 
@@ -79,6 +81,7 @@ public class TextLabel {
 		font = font.deriveFont(Font.PLAIN, fontSize);
 	}
 
+	@Override
 	public void draw(Graphics2D g) {
 		g.setFont(font);
 		g.setColor(color);

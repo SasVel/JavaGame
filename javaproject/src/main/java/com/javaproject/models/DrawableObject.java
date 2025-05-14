@@ -16,7 +16,7 @@ public abstract class DrawableObject implements Drawable {
 	private final ObjectData data;
 	
 	protected final int Width, Height;
-	protected final int PosX, PosY;
+	protected int PosX, PosY;
 	
 	protected BufferedImage image;
 

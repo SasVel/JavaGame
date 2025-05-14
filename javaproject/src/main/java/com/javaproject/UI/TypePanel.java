@@ -11,11 +11,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.javaproject.interfaces.Drawable;
+import com.javaproject.interfaces.Updateable;
 import com.javaproject.managers.InputManager;
 import com.javaproject.managers.SoundManager;
 import com.javaproject.models.Item;
 
-public class TypePanel extends JPanel implements Drawable {
+public class TypePanel extends JPanel implements Drawable, Updateable {
 
 	public TypeDisplayLabel displayLabel;
 	public TypeInputLabel inputLabel;
@@ -56,6 +57,7 @@ public class TypePanel extends JPanel implements Drawable {
 		inputLabel.setY(textY);
 	}
 	
+	@Override
 	public void update(double delta) {
 		inputLabel.update(delta);
 	}
