@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javaproject.models.Item;
 import com.javaproject.models.Item.Difficulty;
 
 public class ItemDataTest {

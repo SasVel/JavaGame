@@ -17,17 +17,18 @@ import com.javaproject.util.Timer;
 
 public class GameDay implements Drawable, CustomerDoneListener, TimerListener{
 	private final long id;
-	private List<Customer> customers = new ArrayList<>();
+	
+	private final List<Customer> customers = new ArrayList<>();
 	private int currCustomerIdx = 0;
 	private Customer currCustomer;
 	
 	private static long passedDays = 0;
 	
-	private List<DayDoneListener> listeners = new ArrayList<>();
+	private final List<DayDoneListener> listeners = new ArrayList<>();
 
 	private TextLabel dayLabel;
 	private final MoneyTracker moneyTracker;
-	private Timer dayTimer = new Timer(60 * 5);
+	private final Timer dayTimer = new Timer(60 * 5);
 	
 	public GameDay(ItemsManager _items, CustomersManager customersManager, MoneyTracker _moneyTracker) {
 		passedDays++;

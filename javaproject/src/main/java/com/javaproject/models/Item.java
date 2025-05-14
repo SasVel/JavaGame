@@ -9,18 +9,16 @@ import com.javaproject.data.ItemData;
 
 public class Item extends DrawableObject{
 	private final long id;
+	private ItemData data;
 
-	public ItemData data;
 	private final TextLabel titleLabel = new TextLabel(Color.WHITE, 34);
 	private final TextLabel descLabel = new TextLabel(Color.WHITE, 25);
-
 
 	public enum Difficulty {
 		EASY,
 		MEDIUM,
 		HARD
 	}
-
 
 	@JsonCreator
 	public Item(int _width, int _height, int _posX, int _posY, long _numOfItems, ItemData _data) {
@@ -48,6 +46,10 @@ public class Item extends DrawableObject{
 
 	public long getId() {
 		return id;
+	}
+
+	public ItemData getData() {
+		return data;
 	}
 
 	@Override

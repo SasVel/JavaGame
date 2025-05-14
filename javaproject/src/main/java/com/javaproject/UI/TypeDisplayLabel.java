@@ -15,7 +15,7 @@ public class TypeDisplayLabel extends TextLabel {
 		textList.clear();
 		double itemsPriceTotal = 0;
 		for (Item item : items) {
-			itemsPriceTotal += item.data.getPrice();
+			itemsPriceTotal += item.getData().getPrice();
 			textList.add(item.toString());
 		}
 		textList.add(seperator);

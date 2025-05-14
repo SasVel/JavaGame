@@ -2,8 +2,11 @@ package com.javaproject.managers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,12 +16,15 @@ import com.javaproject.models.Customer;
 
 public class CustomersManager {
 	
-	Random rand = new Random();
-	ObjectMapper mapper = new ObjectMapper();
+	private final Random rand = new Random();
+	private final ObjectMapper mapper = new ObjectMapper();
 	private TypePanel typePanel;
 	private ItemsManager itemsManager;
 
-	private List<CustomerData> customersData;
+	private HashSet<CustomerData> customersData;
+	private Iterator<CustomerData> customersIterator;
+
+	private static long customersNum = 0;
 	
 	public CustomersManager(TypePanel _typePanel, ItemsManager _itemsManager) {
 
@@ -26,22 +32,43 @@ public class CustomersManager {
 		itemsManager = _itemsManager;
 
 		try {
-			customersData = mapper.readValue(getClass().getResource("/data/customers.json"), new TypeReference<List<CustomerData>>() {});
+			customersData = mapper.readValue(getClass().getResource("/data/customers.json"), new TypeReference<HashSet<CustomerData>>() {});
+			customersIterator = customersData.iterator();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public List<CustomerData> getAllCustomersData() {
+	public static long getCustomersNum() {
+		return customersNum;
+	}
+
+	public Set<CustomerData> getAllCustomersData() {
 		return customersData;
 	}
 
+	public Customer getNewCustomer(CustomerData data) {
+		customersNum++;
+		return new Customer(450, 800, 350, 300, customersNum, data, typePanel, itemsManager);
+	}
+
 	private CustomerData getRandCustomerData() {
-		return customersData.get(rand.nextInt(customersData.size() - 1));
+		customersIterator = customersData.iterator();
+		CustomerData res = customersIterator.next();
+		int randIdx = rand.nextInt(customersData.size());
+		int currIdx = 0;
+
+		while (customersIterator.hasNext()) {
+			res = customersIterator.next();
+			currIdx++;
+			if (currIdx == randIdx) break;
+		}
+		return res;
 	}
 
 	private Customer getNewRandCustomer() {
-		return new Customer(450, 800, 350, 300, getRandCustomerData(), typePanel, itemsManager);
+		customersNum++;
+		return new Customer(450, 800, 350, 300, customersNum, getRandCustomerData(), typePanel, itemsManager);
 	}
 
 	public List<CustomerData> getRandCustomerDataInRange(int lower, int upper) {

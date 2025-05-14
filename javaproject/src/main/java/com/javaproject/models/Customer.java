@@ -18,19 +18,18 @@ public class Customer extends DrawableObject implements TypingInputListener {
 	private int currItemIdx = 0;
 	private Item currItem;
 
-	private List<CustomerDoneListener> listeners = new ArrayList<>();
+	private final List<CustomerDoneListener> listeners = new ArrayList<>();
 
-	private static long customersNum = 0;
 
-	public Customer(int _width, int _height, int _posX, int _posY, CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) {
+	public Customer(int _width, int _height, int _posX, int _posY, long _id, CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) {
 		super(_width, _height, _posX, _posY, _data);
-		customersNum++;
-		id = customersNum;
+		id = _id;
 
 		this.data = _data;
 		this.typePanel = _typePanel;
 		this.items = _itemsManager.getRandItemsInRange(1, 4);
 		this.currItemIdx = 0;
+		this.currItem = items.get(currItemIdx);
 	}
 
 	public long getId() {
@@ -102,10 +101,11 @@ public class Customer extends DrawableObject implements TypingInputListener {
 	}
 
 	public double getPriceCombined() {
-		double res = 0;
-		for (Item item : items) {
-			res += item.data.getPrice();
-		}
+		double res = items
+			.stream()
+			.mapToDouble(i -> i.getData().getPrice())
+			.sum();
+		
 		return res;
 	}
 }

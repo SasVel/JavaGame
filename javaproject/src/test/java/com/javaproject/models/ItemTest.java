@@ -12,10 +12,10 @@ import com.javaproject.models.Item.Difficulty;
 
 public class ItemTest {
 
-	ItemData itemData = new ItemData("Ember Root", "TestDesc", (double)5.50d, Difficulty.MEDIUM);
+	ItemData data = new ItemData("Ember Root", "TestDesc", (double)5.50d, Difficulty.MEDIUM);
 	ItemsManager itemsManager = new ItemsManager();
 	Random rand = new Random();
-	Item item = itemsManager.getItem(itemData);
+	Item item = itemsManager.getItem(data);
 
 	@Test
 	public void testGetId() {
@@ -35,7 +35,7 @@ public class ItemTest {
 	@Test
 	public void testToString() {
 		//
-		String expected = String.format("%s - %s", item.data.getName(), String.format("%.2f", item.data.getPrice()));
+		String expected = String.format("%s - %s", item.getData().getName(), String.format("%.2f", item.getData().getPrice()));
 		String actual = item.toString();
 
 		Assert.assertEquals(expected, actual);

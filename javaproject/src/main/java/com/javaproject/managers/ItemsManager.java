@@ -2,7 +2,8 @@ package com.javaproject.managers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -17,13 +18,15 @@ public class ItemsManager {
 	
 	Random rand = new Random();
 	ObjectMapper mapper = new ObjectMapper();
-	private List<ItemData> itemsData;
+	private HashSet<ItemData> itemsData;
+	private Iterator<ItemData> itemsIterator;
 
 	private static long numOfItems = 0;
 	
 	public ItemsManager() {
 		try {
-			itemsData = mapper.readValue(getClass().getResource("/data/items.json"), new TypeReference<List<ItemData>>() {});
+			itemsData = mapper.readValue(getClass().getResource("/data/items.json"), new TypeReference<HashSet<ItemData>>() {});
+			itemsIterator = itemsData.iterator();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -33,12 +36,26 @@ public class ItemsManager {
 		return numOfItems;
 	}
 
+	private ItemData getRandItemData() {
+		itemsIterator = itemsData.iterator();
+		ItemData res = itemsIterator.next();
+		int randIdx = rand.nextInt(itemsData.size());
+		int currIdx = 0;
+
+		while (itemsIterator.hasNext()) {
+			res = itemsIterator.next();
+			currIdx++;
+			if (currIdx == randIdx) break;
+		}
+		return res;
+	}
+
 	public Item getItem(ItemData data) {
 		numOfItems++;
 		return new Item(250, 250, 100, 600, numOfItems, data);
 	}
 
-	public List<ItemData> getAllItemsData() {
+	public HashSet<ItemData> getAllItemsData() {
 		return itemsData;
 	}
 
@@ -47,7 +64,7 @@ public class ItemsManager {
 
 		List<Item> resItems = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			resItems.add(getItem(itemsData.get(rand.nextInt(itemsData.size() - 1))));
+			resItems.add(getItem(getRandItemData()));
 		}
 		return resItems;
 	}

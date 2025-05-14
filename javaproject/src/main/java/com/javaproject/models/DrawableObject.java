@@ -13,7 +13,7 @@ import com.javaproject.interfaces.ObjectData;
 
 public abstract class DrawableObject implements Drawable {
 
-	public ObjectData data;
+	private final ObjectData data;
 	
 	protected final int Width, Height;
 	protected final int PosX, PosY;
@@ -29,6 +29,10 @@ public abstract class DrawableObject implements Drawable {
 		data = _data;
 
 		loadImage();
+	}
+
+	public ObjectData getData() {
+		return data;
 	}
 
 	@Override
