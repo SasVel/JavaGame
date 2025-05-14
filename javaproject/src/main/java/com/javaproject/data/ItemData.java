@@ -3,12 +3,13 @@ package com.javaproject.data;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javaproject.interfaces.ObjectData;
+import com.javaproject.models.Item.Difficulty;
 
 public class ItemData implements ObjectData{
 	private final String name;
 	private final String desc;
 	private final double price;
-	private final short difficulty;
+	private final Difficulty difficulty;
 	private final String imgPathRelative;
 
 
@@ -17,7 +18,7 @@ public class ItemData implements ObjectData{
 		@JsonProperty("name") String name, 
 		@JsonProperty("desc") String desc, 
 		@JsonProperty("price") double price, 
-		@JsonProperty("difficulty") short difficulty) {
+		@JsonProperty("difficulty") Difficulty difficulty) {
 		
 		this.name = name;
 		this.desc = desc;
@@ -39,7 +40,7 @@ public class ItemData implements ObjectData{
 		return price;
 	}
 
-	public short getDifficulty() {
+	public Difficulty getDifficulty() {
 		return difficulty;
 	}
 

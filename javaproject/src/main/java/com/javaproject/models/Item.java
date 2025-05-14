@@ -14,15 +14,20 @@ public class Item extends DrawableObject{
 	private final TextLabel titleLabel = new TextLabel(Color.WHITE, 34);
 	private final TextLabel descLabel = new TextLabel(Color.WHITE, 25);
 
-	private static long numOfItems = 0;
+
+	public enum Difficulty {
+		EASY,
+		MEDIUM,
+		HARD
+	}
+
 
 	@JsonCreator
-	public Item(int _width, int _height, int _posX, int _posY, ItemData _data) {
+	public Item(int _width, int _height, int _posX, int _posY, long _numOfItems, ItemData _data) {
 		super(_width, _height, _posX, _posY, _data);
 		
 		this.data = _data;
-		numOfItems++;
-		this.id = numOfItems;
+		this.id = _numOfItems;
 
 		configTitleLabel();
 		configDescLabel();
