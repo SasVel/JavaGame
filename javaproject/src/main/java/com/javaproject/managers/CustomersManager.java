@@ -59,9 +59,9 @@ public class CustomersManager {
 		int currIdx = 0;
 
 		while (customersIterator.hasNext()) {
+			if (currIdx == randIdx) break;
 			res = customersIterator.next();
 			currIdx++;
-			if (currIdx == randIdx) break;
 		}
 		return res;
 	}

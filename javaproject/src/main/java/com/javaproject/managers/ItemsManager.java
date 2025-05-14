@@ -43,9 +43,9 @@ public class ItemsManager {
 		int currIdx = 0;
 
 		while (itemsIterator.hasNext()) {
+			if (currIdx == randIdx) break;
 			res = itemsIterator.next();
 			currIdx++;
-			if (currIdx == randIdx) break;
 		}
 		return res;
 	}
