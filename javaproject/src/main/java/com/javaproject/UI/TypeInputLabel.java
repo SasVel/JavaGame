@@ -5,12 +5,14 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.javaproject.interfaces.TimerListener;
 import com.javaproject.interfaces.TypingInputListener;
 import com.javaproject.managers.InputManager;
 import com.javaproject.managers.SoundManager;
 import com.javaproject.managers.SoundManager.SoundTypes;
+import com.javaproject.util.Timer;
 
-public class TypeInputLabel extends TextLabel {
+public class TypeInputLabel extends TextLabel implements TimerListener {
 
 	private final InputManager input;
 	private final SoundManager sound;
@@ -21,11 +23,15 @@ public class TypeInputLabel extends TextLabel {
 	public boolean isTextCompleted = false;
 
 	private TypingInputListener listener;
+	private Color wrongInputColor = Color.RED;
+	private Timer wrongInputTimer = new Timer(0.3);
 
 	public TypeInputLabel(Color color, int _fontSize, InputManager inputManager, SoundManager soundManager) {
 		super(color, _fontSize);
 		input = inputManager;
 		sound = soundManager;
+
+		wrongInputTimer.addListener(this);
 	}
 
 	public void loadTextList(List<String> list) {
@@ -36,7 +42,9 @@ public class TypeInputLabel extends TextLabel {
 		}
 	}
 	
-	public void update() {
+	public void update(double delta) {
+		wrongInputTimer.update(delta);
+
 		if (input.currentState != InputManager.state.Pressed && !isTextCompleted) return;
 
 		char keyChar = (char)input.currKeyCode;
@@ -50,22 +58,45 @@ public class TypeInputLabel extends TextLabel {
 			} else {
 				setNewLine();
 			}
-
+			
 			sound.playSound(SoundTypes.EnterKey);
+			input.reset();
 		} else if (currLineStr.length() != currIdx
 			&& keyChar == currLineStr.charAt(currIdx)) {
 		
 			textList.set(currLine, textList.get(currLine) + keyChar);
 			currIdx++;
-			input.reset();
-
+			
 			if (keyChar == KeyEvent.VK_SPACE) {
 				sound.playSound(SoundTypes.SpaceKey);
 			} else {
 				sound.playSound(SoundTypes.TypeKey);
 			}
-
+			
+			input.reset();
+		} else {
+			onIncorrectInput();
+			input.reset();
 		}
+	}
+
+	private void onIncorrectInput() {
+		if (wrongInputTimer.isOn()) {
+			wrongInputTimer.reset();
+			return;
+		}
+
+		Color tempColor = color;
+		color = wrongInputColor;
+		wrongInputColor = tempColor;
+		wrongInputTimer.start();
+	}
+
+	@Override
+	public void onTimeout() {
+		Color tempColor = color;
+		color = wrongInputColor;
+		wrongInputColor = tempColor;
 	}
 
 	public TypingInputListener getListener() {
@@ -99,4 +130,6 @@ public class TypeInputLabel extends TextLabel {
 		textList.set(currLine, seperator);
 		currLine++;
 	}
+
+
 }

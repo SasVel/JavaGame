@@ -16,7 +16,7 @@ public class TextLabel {
 	private int y = 200;
 
 	private Font font;
-	private Color color;
+	protected Color color;
 	private float fontSize = 40;
 	private int lineSeperation = 5;
 

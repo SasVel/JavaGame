@@ -22,6 +22,10 @@ public class Timer {
 		return time;
 	}
 
+	public boolean isOn() {
+		return isOn;
+	}
+
 	public double getElapsedTime() {
 		return elapsedTime;
 	}
@@ -30,8 +34,12 @@ public class Timer {
 		isOn = true;
 	}
 
-	public void reset() {
+	public void stop() {
 		isOn = false;
+		elapsedTime = 0;
+	}
+
+	public void reset() {
 		elapsedTime = 0;
 	}
 
@@ -43,7 +51,7 @@ public class Timer {
 		for (TimerListener listener : listeners) {
 			listener.onTimeout();
 		}
-		reset();
+		stop();
 	}
 
 

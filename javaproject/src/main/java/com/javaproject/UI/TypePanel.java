@@ -56,8 +56,8 @@ public class TypePanel extends JPanel implements Drawable {
 		inputLabel.setY(textY);
 	}
 	
-	public void update() {
-		inputLabel.update();
+	public void update(double delta) {
+		inputLabel.update(delta);
 	}
 
 	@Override

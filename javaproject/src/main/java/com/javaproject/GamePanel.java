@@ -113,7 +113,7 @@ public final class GamePanel extends JPanel implements Runnable{
 
 	public void update(double delta) {
 		gameController.update(delta);
-		typePanel.update();
+		typePanel.update(delta);
 	}
 
 	@Override
