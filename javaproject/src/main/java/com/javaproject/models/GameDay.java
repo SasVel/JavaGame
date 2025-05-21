@@ -7,15 +7,15 @@ import java.util.List;
 
 import com.javaproject.UI.MoneyTracker;
 import com.javaproject.UI.TextLabel;
-import com.javaproject.interfaces.CustomerDoneListener;
-import com.javaproject.interfaces.DayDoneListener;
-import com.javaproject.interfaces.Drawable;
-import com.javaproject.interfaces.TimerListener;
+import com.javaproject.interfaces.ICustomerDoneListener;
+import com.javaproject.interfaces.IDayDoneListener;
+import com.javaproject.interfaces.IDrawable;
+import com.javaproject.interfaces.ITimerListener;
 import com.javaproject.managers.CustomersManager;
 import com.javaproject.managers.ItemsManager;
 import com.javaproject.util.Timer;
 
-public class GameDay implements Drawable, CustomerDoneListener, TimerListener{
+public class GameDay implements IDrawable, ICustomerDoneListener, ITimerListener{
 	private final long id;
 	
 	private final List<Customer> customers = new ArrayList<>();
@@ -24,7 +24,7 @@ public class GameDay implements Drawable, CustomerDoneListener, TimerListener{
 	
 	private static long passedDays = 0;
 	
-	private final List<DayDoneListener> listeners = new ArrayList<>();
+	private final List<IDayDoneListener> listeners = new ArrayList<>();
 
 	private TextLabel dayLabel;
 	private final MoneyTracker moneyTracker;
@@ -81,12 +81,12 @@ public class GameDay implements Drawable, CustomerDoneListener, TimerListener{
 		return passedDays;
 	}
 
-	public void addListener(DayDoneListener listener) {
+	public void addListener(IDayDoneListener listener) {
 		listeners.add(listener);
 	}
 
 	private void dayFinished() {
-		for (DayDoneListener listener : listeners) {
+		for (IDayDoneListener listener : listeners) {
 			listener.dayFinished();
 		}
 	}

@@ -9,9 +9,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javaproject.interfaces.Drawable;
+import com.javaproject.interfaces.IDrawable;
 
-public class TextLabel implements Drawable {
+public class TextLabel implements IDrawable {
 
 	public List<String> textList = new ArrayList<>();
 	private int x = 200;

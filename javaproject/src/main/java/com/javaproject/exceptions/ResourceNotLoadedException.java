@@ -1,0 +1,10 @@
+package com.javaproject.exceptions;
+
+import java.io.IOException;
+
+public class ResourceNotLoadedException extends IOException{
+	public ResourceNotLoadedException(String resPath) {
+		super();
+		System.err.println("Resource not loaded at path" + resPath);
+	}
+}

@@ -3,7 +3,7 @@
 		"name": "Ember Root",
 		"desc": "Rare roots used as a potent fire starter.",
 		"price": "12.50",
-		"difficulty": "1"
+		"difficulty": "0"
 	},
 	{
 		"name": "Sweet Rosehip",
@@ -27,7 +27,7 @@
 		"name": "Windigo Skull",
 		"desc": "Feels a little cursed.",
 		"price": "8.99",
-		"difficulty": "1"
+		"difficulty": "2"
 	},
 	{
 		"name": "Dragon Scales",
@@ -51,7 +51,7 @@
 		"name": "Wolf Hide",
 		"desc": "Really cozy if you dont have a dog.",
 		"price": "10.35",
-		"difficulty": "1"
+		"difficulty": "0"
 	},
 	{
 		"name": "Mystery Steak",
@@ -69,7 +69,7 @@
 		"name": "Cool Feather",
 		"desc": "You can put it on your hat! Or write with it!",
 		"price": "4.99",
-		"difficulty": "1"
+		"difficulty": "0"
 	},
 	{
 		"name": "Healing Shrooms",
@@ -81,7 +81,7 @@
 		"name": "Questionable Shrooms",
 		"desc": "Better not ask questions.",
 		"price": "11.25",
-		"difficulty": "1"
+		"difficulty": "2"
 	},
 	{
 		"name": "Deer Antlers",
@@ -111,7 +111,7 @@
 		"name": "Mandrake",
 		"desc": "Doesn't scream if you chop his head.",
 		"price": "5.99",
-		"difficulty": "1"
+		"difficulty": "0"
 	},
 	{
 		"name": "Fire Blossom",

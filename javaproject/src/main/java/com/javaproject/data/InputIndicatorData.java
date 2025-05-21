@@ -1,8 +1,8 @@
 package com.javaproject.data;
 
-import com.javaproject.interfaces.ObjectData;
+import com.javaproject.interfaces.IObjectData;
 
-public class InputIndicatorData implements ObjectData {
+public class InputIndicatorData implements IObjectData {
 	private String imgPathRelative = "/data/Props/NewLine.png";
 
 	@Override

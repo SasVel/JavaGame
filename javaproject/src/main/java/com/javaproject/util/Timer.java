@@ -3,18 +3,18 @@ package com.javaproject.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javaproject.interfaces.TimerListener;
-import com.javaproject.interfaces.Updateable;
+import com.javaproject.interfaces.ITimerListener;
+import com.javaproject.interfaces.IUpdateable;
 
 
-public class Timer implements Updateable {
+public class Timer implements IUpdateable {
 
 	private final double time;
 	private double elapsedTime = 0;
 	private boolean isOn = false;
 	public boolean isRepeating;
 
-	private List<TimerListener> listeners = new ArrayList<>();
+	private final List<ITimerListener> listeners = new ArrayList<>();
 
 	public Timer(double _time) {
 		time = _time;
@@ -50,7 +50,7 @@ public class Timer implements Updateable {
 	}
 
 	private void timeout() {
-		for (TimerListener listener : listeners) {
+		for (ITimerListener listener : listeners) {
 			listener.onTimeout();
 		}
 		if (!isRepeating) stop();
@@ -58,7 +58,7 @@ public class Timer implements Updateable {
 	}
 
 
-	public void addListener(TimerListener listener) {
+	public void addListener(ITimerListener listener) {
 		listeners.add(listener);
 	}
 

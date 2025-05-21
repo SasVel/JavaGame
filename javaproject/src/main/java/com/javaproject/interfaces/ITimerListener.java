@@ -1,5 +1,5 @@
 package com.javaproject.interfaces;
 
-public interface TimerListener {
+public interface ITimerListener {
 	void onTimeout();
 }

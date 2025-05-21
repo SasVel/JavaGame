@@ -6,15 +6,16 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javaproject.interfaces.TimerListener;
-import com.javaproject.interfaces.TypingInputListener;
-import com.javaproject.interfaces.Updateable;
+import com.javaproject.enums.InputState;
+import com.javaproject.enums.SoundTypes;
+import com.javaproject.interfaces.IUpdateable;
+import com.javaproject.interfaces.ITimerListener;
+import com.javaproject.interfaces.ITypingInputListener;
 import com.javaproject.managers.InputManager;
 import com.javaproject.managers.SoundManager;
-import com.javaproject.managers.SoundManager.SoundTypes;
 import com.javaproject.util.Timer;
 
-public class TypeInputLabel extends TextLabel implements Updateable, TimerListener {
+public class TypeInputLabel extends TextLabel implements IUpdateable, ITimerListener {
 
 	private final InputManager input;
 	private final SoundManager sound;
@@ -24,7 +25,7 @@ public class TypeInputLabel extends TextLabel implements Updateable, TimerListen
 	private int currLine = 0;
 	public boolean isTextCompleted = false;
 
-	private TypingInputListener listener;
+	private ITypingInputListener listener;
 	private Color wrongInputColor = Color.RED;
 	private final Timer wrongInputTimer = new Timer(0.3);
 	private final InputIndicator indicator = new InputIndicator(this);
@@ -35,7 +36,6 @@ public class TypeInputLabel extends TextLabel implements Updateable, TimerListen
 		sound = soundManager;
 
 		wrongInputTimer.addListener(this);
-		indicator.updateRelativeToText();
 	}
 
 	public int getCurrIdx() {
@@ -64,7 +64,7 @@ public class TypeInputLabel extends TextLabel implements Updateable, TimerListen
 		wrongInputTimer.update(delta);
 		indicator.update(delta);
 
-		if (input.currentState != InputManager.state.Pressed && !isTextCompleted) return;
+		if (input.currentState != InputState.Pressed && !isTextCompleted) return;
 
 		char keyChar = (char)input.currKeyCode;
 		String currLineStr = expectedTextList.get(currLine);
@@ -126,11 +126,11 @@ public class TypeInputLabel extends TextLabel implements Updateable, TimerListen
 		wrongInputColor = tempColor;
 	}
 
-	public TypingInputListener getListener() {
+	public ITypingInputListener getListener() {
 		return listener;
 	}
 
-	public void setListener(TypingInputListener listener) {
+	public void setListener(ITypingInputListener listener) {
 		this.listener = listener;
 	}
 
@@ -158,5 +158,8 @@ public class TypeInputLabel extends TextLabel implements Updateable, TimerListen
 		currLine++;
 	}
 
+	public void updateIndicator() {
+		indicator.updateRelativeToText();
+	}
 
 }

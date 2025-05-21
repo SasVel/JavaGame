@@ -3,14 +3,11 @@ package com.javaproject.managers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import com.javaproject.enums.InputState;
+
 public class InputManager implements KeyListener{
 
-	public enum state {
-		Pressed,
-		Released
-	}
-
-	public state currentState;
+	public InputState currentState;
 	public int currKeyCode;
 
 	@Override
@@ -21,14 +18,14 @@ public class InputManager implements KeyListener{
 			|| keyChar == KeyEvent.VK_MINUS
 			|| keyChar == KeyEvent.VK_COMMA
 			|| keyChar == KeyEvent.VK_ENTER) {
-			currentState = state.Pressed;
+			currentState = InputState.Pressed;
 			currKeyCode = arg0.getKeyChar();
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		currentState = state.Released;
+		currentState = InputState.Released;
 	}
 
 	@Override

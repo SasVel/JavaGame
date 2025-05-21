@@ -3,12 +3,12 @@ package com.javaproject.UI;
 import java.awt.Graphics2D;
 
 import com.javaproject.data.InputIndicatorData;
-import com.javaproject.interfaces.TimerListener;
-import com.javaproject.interfaces.Updateable;
+import com.javaproject.interfaces.IUpdateable;
+import com.javaproject.interfaces.ITimerListener;
 import com.javaproject.models.DrawableObject;
 import com.javaproject.util.Timer;
 
-public class InputIndicator extends DrawableObject implements Updateable, TimerListener {
+public class InputIndicator extends DrawableObject implements IUpdateable, ITimerListener {
 
 	private final TypeInputLabel targetLabel;
 

@@ -7,12 +7,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.javaproject.data.ItemData;
+import com.javaproject.enums.TextDifficulty;
 import com.javaproject.managers.ItemsManager;
-import com.javaproject.models.Item.Difficulty;
 
 public class ItemTest {
 
-	ItemData data = new ItemData("Ember Root", "TestDesc", (double)5.50d, Difficulty.MEDIUM);
+	ItemData data = new ItemData("Ember Root", "TestDesc", (double)5.50d, TextDifficulty.MEDIUM);
 	ItemsManager itemsManager = new ItemsManager();
 	Random rand = new Random();
 	Item item = itemsManager.getItem(data);
@@ -27,9 +27,9 @@ public class ItemTest {
 
 	@Test
 	public void testGetItemDataByDifficulty() {
-		List<ItemData> filteredData = itemsManager.getItemDataByDifficulty(Difficulty.MEDIUM);
+		List<ItemData> filteredData = itemsManager.getItemDataByDifficulty(TextDifficulty.MEDIUM);
 		
-		Assert.assertTrue(filteredData.stream().allMatch(d -> d.getDifficulty() == Difficulty.MEDIUM));
+		Assert.assertTrue(filteredData.stream().allMatch(d -> d.getDifficulty() == TextDifficulty.MEDIUM));
 	}
 
 	@Test

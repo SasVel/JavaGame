@@ -1,5 +1,5 @@
 package com.javaproject.interfaces;
 
-public interface DayDoneListener {
+public interface IDayDoneListener {
 	void dayFinished();
 }

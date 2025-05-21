@@ -2,9 +2,9 @@ package com.javaproject.data;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.javaproject.interfaces.ObjectData;
+import com.javaproject.interfaces.IObjectData;
 
-public class CustomerData implements ObjectData{
+public class CustomerData implements IObjectData{
 	private final String name;
 	private final String occupation;
 	private final String imgPathRelative;

@@ -4,11 +4,11 @@ import java.awt.Graphics2D;
 
 import com.javaproject.UI.MoneyTracker;
 import com.javaproject.data.CurrencyData;
-import com.javaproject.interfaces.DayDoneListener;
-import com.javaproject.interfaces.Drawable;
+import com.javaproject.interfaces.IDayDoneListener;
+import com.javaproject.interfaces.IDrawable;
 import com.javaproject.models.GameDay;
 
-public final class GameController implements Drawable, DayDoneListener{
+public final class GameController implements IDrawable, IDayDoneListener{
 
 	private final ItemsManager items;
 	private final CustomersManager customersManager;

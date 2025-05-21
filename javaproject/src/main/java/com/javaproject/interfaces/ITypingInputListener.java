@@ -1,6 +1,6 @@
 package com.javaproject.interfaces;
 
-public interface TypingInputListener {
+public interface ITypingInputListener {
 	void newLineStarted();
 	void textCompleted();
 }

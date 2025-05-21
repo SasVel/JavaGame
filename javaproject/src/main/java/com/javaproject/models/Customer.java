@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.javaproject.UI.TypePanel;
 import com.javaproject.data.CustomerData;
-import com.javaproject.interfaces.CustomerDoneListener;
-import com.javaproject.interfaces.TypingInputListener;
+import com.javaproject.interfaces.ICustomerDoneListener;
+import com.javaproject.interfaces.ITypingInputListener;
 import com.javaproject.managers.ItemsManager;
 
-public class Customer extends DrawableObject implements TypingInputListener {
+public class Customer extends DrawableObject implements ITypingInputListener {
 	private final long id;
 	protected CustomerData data;
 	private final TypePanel typePanel;
@@ -18,7 +18,7 @@ public class Customer extends DrawableObject implements TypingInputListener {
 	private int currItemIdx = 0;
 	private Item currItem;
 
-	private final List<CustomerDoneListener> listeners = new ArrayList<>();
+	private final List<ICustomerDoneListener> listeners = new ArrayList<>();
 
 
 	public Customer(int _width, int _height, int _posX, int _posY, long _id, CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) {
@@ -63,7 +63,7 @@ public class Customer extends DrawableObject implements TypingInputListener {
 		return data.getImgPathRelative();
 	}
 
-	public void addListener(CustomerDoneListener listener) {
+	public void addListener(ICustomerDoneListener listener) {
 		listeners.add(listener);
 	}
 
@@ -76,7 +76,7 @@ public class Customer extends DrawableObject implements TypingInputListener {
 	}
 
 	private void customerDone() {
-		for (CustomerDoneListener listener : listeners) {
+		for (ICustomerDoneListener listener : listeners) {
 			listener.customerDone();
 		}
 	}

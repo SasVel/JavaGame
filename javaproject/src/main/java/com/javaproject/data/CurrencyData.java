@@ -1,8 +1,8 @@
 package com.javaproject.data;
 
-import com.javaproject.interfaces.ObjectData;
+import com.javaproject.interfaces.IObjectData;
 
-public class CurrencyData implements ObjectData{
+public class CurrencyData implements IObjectData{
 	private double currency = 0;
 
 	public double getCurrency() {

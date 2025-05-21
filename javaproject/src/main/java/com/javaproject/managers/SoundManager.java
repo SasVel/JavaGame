@@ -10,6 +10,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import com.javaproject.enums.SoundTypes;
+
 public class SoundManager {
 	Clip clip;
 	Random rand = new Random();
@@ -17,12 +19,6 @@ public class SoundManager {
 	URL typeKeySounds[] = new URL[2];
 	URL spaceKeySounds[] = new URL[1];
 	URL enterKeySounds[] = new URL[1];
-
-	public enum SoundTypes {
-		TypeKey,
-		SpaceKey,
-		EnterKey
-	}
 
 	public SoundManager() {
 		typeKeySounds[0] = getClass().getResource("/musicAndSounds/sounds/KeyPress_1.wav");

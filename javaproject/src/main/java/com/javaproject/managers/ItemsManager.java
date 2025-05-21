@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaproject.data.ItemData;
+import com.javaproject.enums.TextDifficulty;
 import com.javaproject.models.Item;
-import com.javaproject.models.Item.Difficulty;
 
 public class ItemsManager {
 	
@@ -69,7 +69,7 @@ public class ItemsManager {
 		return resItems;
 	}
 
-	public List<ItemData> getItemDataByDifficulty(Difficulty diff) {
+	public List<ItemData> getItemDataByDifficulty(TextDifficulty diff) {
 		return itemsData
 			.stream()
 			.filter(i -> i.getDifficulty() == diff)

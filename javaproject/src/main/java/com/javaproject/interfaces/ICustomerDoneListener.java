@@ -1,5 +1,5 @@
 package com.javaproject.interfaces;
 
-public interface CustomerDoneListener {
+public interface ICustomerDoneListener {
 	void customerDone();
 }

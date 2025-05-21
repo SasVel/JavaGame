@@ -8,10 +8,10 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javaproject.models.Item.Difficulty;
+import com.javaproject.enums.TextDifficulty;
 
 public class ItemDataTest {
-	static ItemData data = new ItemData("Ember Root", "Rare roots used as a potent fire starter.", (double)12.5, Difficulty.MEDIUM);
+	static ItemData data = new ItemData("Ember Root", "Rare roots used as a potent fire starter.", (double)12.5, TextDifficulty.MEDIUM);
 	static ObjectMapper mapper = new ObjectMapper();
 
 	@Test

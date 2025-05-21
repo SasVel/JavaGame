@@ -8,19 +8,19 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-import com.javaproject.interfaces.Drawable;
-import com.javaproject.interfaces.ObjectData;
+import com.javaproject.interfaces.IDrawable;
+import com.javaproject.interfaces.IObjectData;
 
-public abstract class DrawableObject implements Drawable {
+public abstract class DrawableObject implements IDrawable {
 
-	private final ObjectData data;
+	private final IObjectData data;
 	
 	protected final int Width, Height;
 	protected int PosX, PosY;
 	
 	protected BufferedImage image;
 
-	public DrawableObject(int _width, int _height, int _posX, int _posY, ObjectData _data) {
+	public DrawableObject(int _width, int _height, int _posX, int _posY, IObjectData _data) {
 		super();
 		Width = _width;
 		Height = _height;
@@ -31,7 +31,7 @@ public abstract class DrawableObject implements Drawable {
 		loadImage();
 	}
 
-	public ObjectData getData() {
+	public IObjectData getData() {
 		return data;
 	}
 

@@ -1,5 +1,5 @@
 package com.javaproject.interfaces;
 
-public interface Updateable {
+public interface IUpdateable {
 	void update(double delta);
 }
