@@ -13,7 +13,7 @@ import com.javaproject.interfaces.IDrawable;
 
 public class TextLabel implements IDrawable {
 
-	public List<String> textList = new ArrayList<>();
+	public List<String> textList;
 	private int x = 200;
 	private int y = 200;
 
@@ -27,6 +27,8 @@ public class TextLabel implements IDrawable {
 	public int autowrapCharNum = 25;
 
 	public TextLabel(Color color, int _fontSize) {
+		textList = new ArrayList<>();
+
 		try {
 			InputStream is = getClass().getResourceAsStream("/font/SpecialElite.ttf");
 			font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, _fontSize);

@@ -49,6 +49,7 @@ public class ItemDataTest {
 
 
 	@Test
+	@SuppressWarnings("unused")
 	public void testDataLoading() {
 		List<ItemData> itemData;
 		try {

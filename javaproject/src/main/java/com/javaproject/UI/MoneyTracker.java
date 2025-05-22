@@ -9,11 +9,12 @@ import com.javaproject.models.DrawableObject;
 public class MoneyTracker extends DrawableObject {
 	private final CurrencyData data;
 
+
 	private final TextLabel coinLabel = new TextLabel(Color.WHITE, 42);
-	public MoneyTracker(int _width, int _height, int _posX, int _posY, CurrencyData _data) {
-		super(_width, _height, _posX, _posY, _data);
-		data = _data;
-		
+	public MoneyTracker(int _width, int _height, int _posX, int _posY, CurrencyData _currencyData) {
+		super(_width, _height, _posX, _posY, _currencyData);
+		data = _currencyData;
+
 		configCoinLabel();
 	}
 

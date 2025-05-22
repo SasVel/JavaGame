@@ -1,6 +1,8 @@
 package com.javaproject.data;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CurrencyDataTest {
 	static CurrencyData data = new CurrencyData();
@@ -9,7 +11,6 @@ public class CurrencyDataTest {
 	public void configure() {
 		data.setCurrency(10.5);
 	}
-
 
 	@Test
 	public void testGetSetCurrency() {

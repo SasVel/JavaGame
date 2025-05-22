@@ -1,7 +1,6 @@
 package com.javaproject.models;
 
 import java.util.List;
-import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +13,6 @@ public class ItemTest {
 
 	ItemData data = new ItemData("Ember Root", "TestDesc", (double)5.50d, TextDifficulty.MEDIUM);
 	ItemsManager itemsManager = new ItemsManager();
-	Random rand = new Random();
 	Item item = itemsManager.getItem(data);
 
 	@Test
@@ -34,7 +32,6 @@ public class ItemTest {
 
 	@Test
 	public void testToString() {
-		//
 		String expected = String.format("%s - %s", item.getData().getName(), String.format("%.2f", item.getData().getPrice()));
 		String actual = item.toString();
 

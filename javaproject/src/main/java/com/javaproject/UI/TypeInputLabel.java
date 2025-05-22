@@ -8,9 +8,9 @@ import java.util.List;
 
 import com.javaproject.enums.InputState;
 import com.javaproject.enums.SoundTypes;
-import com.javaproject.interfaces.IUpdateable;
 import com.javaproject.interfaces.ITimerListener;
 import com.javaproject.interfaces.ITypingInputListener;
+import com.javaproject.interfaces.IUpdateable;
 import com.javaproject.managers.InputManager;
 import com.javaproject.managers.SoundManager;
 import com.javaproject.util.Timer;
@@ -20,7 +20,7 @@ public class TypeInputLabel extends TextLabel implements IUpdateable, ITimerList
 	private final InputManager input;
 	private final SoundManager sound;
 
-	public List<String> expectedTextList = new ArrayList<>();
+	public List<String> expectedTextList;
 	private int currIdx = 0;
 	private int currLine = 0;
 	public boolean isTextCompleted = false;
@@ -32,6 +32,9 @@ public class TypeInputLabel extends TextLabel implements IUpdateable, ITimerList
 
 	public TypeInputLabel(Color color, int _fontSize, InputManager inputManager, SoundManager soundManager) {
 		super(color, _fontSize);
+
+		expectedTextList = new ArrayList<>();
+
 		input = inputManager;
 		sound = soundManager;
 

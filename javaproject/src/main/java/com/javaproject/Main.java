@@ -21,13 +21,12 @@ public class Main {
 
 		window.pack();
 
+		// Not fatal if the icon is missing.
 		try {
 			URL url = gamePanel.getClass().getResource("/data/ItemImages/DragonSlices.png");
 			BufferedImage icon = ImageIO.read(url);
 			window.setIconImage(icon);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch (IOException e) { }
 
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);

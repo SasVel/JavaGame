@@ -18,11 +18,13 @@ public class Customer extends DrawableObject implements ITypingInputListener {
 	private int currItemIdx = 0;
 	private Item currItem;
 
-	private final List<ICustomerDoneListener> listeners = new ArrayList<>();
+	private final List<ICustomerDoneListener> listeners;
 
 
 	public Customer(int _width, int _height, int _posX, int _posY, long _id, CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) {
 		super(_width, _height, _posX, _posY, _data);
+		listeners = new ArrayList<>();
+
 		id = _id;
 
 		this.data = _data;
@@ -59,6 +61,11 @@ public class Customer extends DrawableObject implements ITypingInputListener {
 		return items;
 	}
 
+	@Override
+	public CustomerData getData() {
+		return data;
+	}
+
 	public String getImgRelativePath() {
 		return data.getImgPathRelative();
 	}
@@ -76,9 +83,7 @@ public class Customer extends DrawableObject implements ITypingInputListener {
 	}
 
 	private void customerDone() {
-		for (ICustomerDoneListener listener : listeners) {
-			listener.customerDone();
-		}
+		listeners.stream().forEach(c -> c.customerDone());
 	}
 
 	public void activate() {
@@ -101,11 +106,9 @@ public class Customer extends DrawableObject implements ITypingInputListener {
 	}
 
 	public double getPriceCombined() {
-		double res = items
+		return items
 			.stream()
 			.mapToDouble(i -> i.getData().getPrice())
 			.sum();
-		
-		return res;
 	}
 }

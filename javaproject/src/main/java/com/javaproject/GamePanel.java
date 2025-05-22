@@ -13,9 +13,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.javaproject.UI.TypePanel;
-import com.javaproject.data.CurrencyData;
 import com.javaproject.managers.CustomersManager;
 import com.javaproject.managers.GameController;
+import com.javaproject.managers.GameDataManager;
 import com.javaproject.managers.InputManager;
 import com.javaproject.managers.ItemsManager;
 import com.javaproject.managers.SoundManager;
@@ -38,7 +38,7 @@ public final class GamePanel extends JPanel implements Runnable{
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
 
-	CurrencyData gameData = new CurrencyData();
+	GameDataManager gameDataManager = new GameDataManager();
 	InputManager inputManager = new InputManager();
 	SoundManager soundManager = new SoundManager();
 	ItemsManager itemsManager = new ItemsManager();
@@ -47,7 +47,7 @@ public final class GamePanel extends JPanel implements Runnable{
 	CustomersManager customersManager = new CustomersManager(typePanel, itemsManager);
 
 
-	GameController gameController = new GameController(itemsManager, customersManager, gameData);
+	GameController gameController = new GameController(itemsManager, customersManager, gameDataManager);
 	private Graphics2D graphics;
 
 	//Resources

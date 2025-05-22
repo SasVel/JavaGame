@@ -3,7 +3,6 @@ package com.javaproject.managers;
 import java.awt.Graphics2D;
 
 import com.javaproject.UI.MoneyTracker;
-import com.javaproject.data.CurrencyData;
 import com.javaproject.interfaces.IDayDoneListener;
 import com.javaproject.interfaces.IDrawable;
 import com.javaproject.models.GameDay;
@@ -12,21 +11,21 @@ public final class GameController implements IDrawable, IDayDoneListener{
 
 	private final ItemsManager items;
 	private final CustomersManager customersManager;
-	private final CurrencyData currencyData;
+	private final GameDataManager gameDataManager;
 	private final MoneyTracker moneyTracker;
 	private GameDay currentDay;
 
-	public GameController(ItemsManager _itemsManager, CustomersManager _customersManager, CurrencyData _currencyData) {
+	public GameController(ItemsManager _itemsManager, CustomersManager _customersManager, GameDataManager _gameDataManager) {
 		items = _itemsManager;
 		customersManager = _customersManager;
-		currencyData = _currencyData;
-		moneyTracker = new MoneyTracker(120, 120, 1450, 60, currencyData);
+		gameDataManager = _gameDataManager;
+		moneyTracker = new MoneyTracker(120, 120, 1450, 60, gameDataManager.getCurrencyData());
 
 		startNewDay();
 	}
 
 	private GameDay getNewDay() {
-		return new GameDay(items, customersManager, moneyTracker);
+		return new GameDay(items, customersManager, gameDataManager, moneyTracker);
 	}
 
 	public GameDay startNewDay() {

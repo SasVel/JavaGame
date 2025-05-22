@@ -14,10 +14,11 @@ public class Timer implements IUpdateable {
 	private boolean isOn = false;
 	public boolean isRepeating;
 
-	private final List<ITimerListener> listeners = new ArrayList<>();
+	private final List<ITimerListener> listeners;
 
 	public Timer(double _time) {
 		time = _time;
+		listeners = new ArrayList<>();
 	}
 
 	public double getTime() {
@@ -30,6 +31,10 @@ public class Timer implements IUpdateable {
 
 	public double getElapsedTime() {
 		return elapsedTime;
+	}
+
+	public void setElapsedTime(double elapsedTime) {
+		this.elapsedTime = elapsedTime;
 	}
 
 	public void start() {
@@ -45,14 +50,13 @@ public class Timer implements IUpdateable {
 		elapsedTime = 0;
 	}
 
-	public float donePercent() {
+	public float getDonePercent() {
 		return (float)(elapsedTime / time);
 	}
 
 	private void timeout() {
-		for (ITimerListener listener : listeners) {
-			listener.onTimeout();
-		}
+		listeners.stream().forEach(l -> l.onTimeout());
+
 		if (!isRepeating) stop();
 		else reset();
 	}

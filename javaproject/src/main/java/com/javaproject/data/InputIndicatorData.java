@@ -3,7 +3,7 @@ package com.javaproject.data;
 import com.javaproject.interfaces.IObjectData;
 
 public class InputIndicatorData implements IObjectData {
-	private String imgPathRelative = "/data/Props/NewLine.png";
+	private final String imgPathRelative = "/data/Props/NewLine.png";
 
 	@Override
 	public String getName() {
