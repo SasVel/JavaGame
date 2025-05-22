@@ -5,11 +5,13 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.interfaces.IDrawable;
 import com.javaproject.interfaces.IUpdateable;
 import com.javaproject.managers.InputManager;
@@ -30,21 +32,22 @@ public class TypePanel extends JPanel implements IDrawable, IUpdateable {
 	//Resources
 	BufferedImage typewriterBG;
 
-	public TypePanel(InputManager _inputManager, SoundManager _soundManager) {
+	public TypePanel(InputManager _inputManager, SoundManager _soundManager) throws ResourceNotLoadedException {
 		super(new BorderLayout());
 		inputManager = _inputManager;
 		soundManager = _soundManager;
 
 		initComponenets();
 
+		URL typewriterRes = getClass().getResource("/data/Props/Typewriter.png");
 		try {
-			typewriterBG = ImageIO.read(getClass().getResource("/data/Props/Typewriter.png"));
+			typewriterBG = ImageIO.read(typewriterRes);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ResourceNotLoadedException(typewriterRes.getPath());
 		}
 	}
 
-	private void initComponenets() {
+	private void initComponenets() throws ResourceNotLoadedException {
 		displayLabel = new TypeDisplayLabel(Color.gray, 32);
 		inputLabel = new TypeInputLabel(Color.black, 32, inputManager, soundManager);
 

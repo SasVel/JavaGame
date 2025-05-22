@@ -10,6 +10,8 @@ import com.javaproject.UI.MoneyTracker;
 import com.javaproject.UI.TextLabel;
 import com.javaproject.data.CustomerData;
 import com.javaproject.data.GameDayData;
+import com.javaproject.exceptions.CorruptGameDataException;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.interfaces.ICustomerDoneListener;
 import com.javaproject.interfaces.IDayDoneListener;
 import com.javaproject.interfaces.IDrawable;
@@ -65,13 +67,23 @@ public class GameDay implements IDrawable, ICustomerDoneListener, ITimerListener
 
 	private void createData() {
 		ArrayList<CustomerData> customersData = customersManager.getRandCustomerDataInRange(6, 8);
-		customersData.stream().forEach(cd -> customers.add(customersManager.getNewCustomer(cd)));
+		customersData.stream().forEach(cd -> {
+			try {
+				customers.add(customersManager.getNewCustomer(cd));
+			} catch (ResourceNotLoadedException e) {}
+		});
 		dayData = new GameDayData(0, customersData);
 	}
 
 	private void loadData(GameDayData data) {
 		dayTimer.setElapsedTime(data.getElapsedTime());
-		data.getCustomersData().stream().forEach(cd -> customers.add(customersManager.getNewCustomer(cd)));
+		data.getCustomersData().stream().forEach(cd -> {
+			try {
+				customers.add(customersManager.getNewCustomer(cd));
+			} catch (ResourceNotLoadedException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	private void configDayLabel() {
@@ -120,7 +132,9 @@ public class GameDay implements IDrawable, ICustomerDoneListener, ITimerListener
 		}
 
 		setActiveCustomer();
-		gameDataManager.saveData();
+		try {
+			gameDataManager.saveData();
+		} catch (CorruptGameDataException e) {}
 	}
 
 	@Override

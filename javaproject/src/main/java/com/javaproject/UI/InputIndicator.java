@@ -3,8 +3,9 @@ package com.javaproject.UI;
 import java.awt.Graphics2D;
 
 import com.javaproject.data.InputIndicatorData;
-import com.javaproject.interfaces.IUpdateable;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.interfaces.ITimerListener;
+import com.javaproject.interfaces.IUpdateable;
 import com.javaproject.models.DrawableObject;
 import com.javaproject.util.Timer;
 
@@ -17,7 +18,7 @@ public class InputIndicator extends DrawableObject implements IUpdateable, ITime
 
 	private final int LineHeight = 3;
 	
-	public InputIndicator(TypeInputLabel _targetLabel) {
+	public InputIndicator(TypeInputLabel _targetLabel) throws ResourceNotLoadedException {
 		super(_targetLabel.getFontSize(), _targetLabel.getFontSize(), _targetLabel.getX(), _targetLabel.getY(), new InputIndicatorData());
 
 		targetLabel = _targetLabel;

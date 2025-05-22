@@ -1,6 +1,5 @@
 package com.javaproject;
 
-import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -8,15 +7,17 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import com.javaproject.exceptions.ResourceNotLoadedException;
+
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ResourceNotLoadedException {
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 
 		window.setTitle("Alchemical Wonders");
 
-		GamePanel gamePanel = new GamePanel(new BorderLayout());
+		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
 
 		window.pack();

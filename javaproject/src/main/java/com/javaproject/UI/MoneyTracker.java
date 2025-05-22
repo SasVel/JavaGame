@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import com.javaproject.data.CurrencyData;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.models.DrawableObject;
 
 public class MoneyTracker extends DrawableObject {
@@ -11,7 +12,7 @@ public class MoneyTracker extends DrawableObject {
 
 
 	private final TextLabel coinLabel = new TextLabel(Color.WHITE, 42);
-	public MoneyTracker(int _width, int _height, int _posX, int _posY, CurrencyData _currencyData) {
+	public MoneyTracker(int _width, int _height, int _posX, int _posY, CurrencyData _currencyData) throws ResourceNotLoadedException {
 		super(_width, _height, _posX, _posY, _currencyData);
 		data = _currencyData;
 

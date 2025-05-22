@@ -21,13 +21,6 @@ public class GameData {
 		currencyData = new CurrencyData();
 	}
 
-
-
-	@JsonProperty("currencyData")
-	public void deserializeCurrencyData(String data) {
-		return;
-	}
-
 	public CurrencyData getCurrencyData() {
 		return currencyData;
 	}

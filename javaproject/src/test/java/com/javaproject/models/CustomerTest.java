@@ -6,19 +6,21 @@ import org.junit.Test;
 
 import com.javaproject.UI.TypePanel;
 import com.javaproject.data.CustomerData;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.managers.CustomersManager;
 import com.javaproject.managers.ItemsManager;
 
 public class CustomerTest {
 
 	CustomerData data = new CustomerData("Goshko", "Guard");
-	TypePanel typePanel = new TypePanel(null, null);
+	TypePanel typePanel;
 	ItemsManager itemsManager;
 	CustomersManager customersManager;
 	Customer customer;
 
 	@Before
-	public void configureBeforeTest() {
+	public void configureBeforeTest() throws ResourceNotLoadedException {
+		typePanel = new TypePanel(null, null);
 		itemsManager = new ItemsManager();
 		customersManager = new CustomersManager(typePanel, itemsManager);
 		customer = customersManager.getNewCustomer(data);
@@ -34,7 +36,7 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void testGetId() {
+	public void testGetId() throws ResourceNotLoadedException {
 		customer = customersManager.getNewCustomer(data);
 
 		long expected = CustomersManager.getCustomersNum();

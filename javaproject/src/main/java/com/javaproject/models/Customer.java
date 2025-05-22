@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.javaproject.UI.TypePanel;
 import com.javaproject.data.CustomerData;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.interfaces.ICustomerDoneListener;
 import com.javaproject.interfaces.ITypingInputListener;
 import com.javaproject.managers.ItemsManager;
@@ -21,7 +22,7 @@ public class Customer extends DrawableObject implements ITypingInputListener {
 	private final List<ICustomerDoneListener> listeners;
 
 
-	public Customer(int _width, int _height, int _posX, int _posY, long _id, CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) {
+	public Customer(int _width, int _height, int _posX, int _posY, long _id, CustomerData _data, TypePanel _typePanel, ItemsManager _itemsManager) throws ResourceNotLoadedException {
 		super(_width, _height, _posX, _posY, _data);
 		listeners = new ArrayList<>();
 

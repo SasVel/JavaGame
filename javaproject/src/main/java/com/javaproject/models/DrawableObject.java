@@ -8,6 +8,7 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.interfaces.IDrawable;
 import com.javaproject.interfaces.IObjectData;
 
@@ -20,7 +21,7 @@ public abstract class DrawableObject implements IDrawable {
 	
 	protected BufferedImage image;
 
-	public DrawableObject(int _width, int _height, int _posX, int _posY, IObjectData _data) {
+	public DrawableObject(int _width, int _height, int _posX, int _posY, IObjectData _data) throws ResourceNotLoadedException {
 		super();
 		Width = _width;
 		Height = _height;
@@ -40,12 +41,12 @@ public abstract class DrawableObject implements IDrawable {
 		g.drawImage(resize(image, Width, Height), PosX, PosY, null);
 	}
 
-	private void loadImage() {
+	private void loadImage() throws ResourceNotLoadedException {
 		try {
 			URL url = getClass().getResource(data.getImgPathRelative());
 			image = ImageIO.read(url);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ResourceNotLoadedException(data.getImgPathRelative());
 		}
 	}
 

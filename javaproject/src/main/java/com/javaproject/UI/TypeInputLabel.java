@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.javaproject.enums.InputState;
 import com.javaproject.enums.SoundTypes;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.interfaces.ITimerListener;
 import com.javaproject.interfaces.ITypingInputListener;
 import com.javaproject.interfaces.IUpdateable;
@@ -28,11 +29,12 @@ public class TypeInputLabel extends TextLabel implements IUpdateable, ITimerList
 	private ITypingInputListener listener;
 	private Color wrongInputColor = Color.RED;
 	private final Timer wrongInputTimer = new Timer(0.3);
-	private final InputIndicator indicator = new InputIndicator(this);
+	private final InputIndicator indicator;
 
-	public TypeInputLabel(Color color, int _fontSize, InputManager inputManager, SoundManager soundManager) {
+	public TypeInputLabel(Color color, int _fontSize, InputManager inputManager, SoundManager soundManager) throws ResourceNotLoadedException {
 		super(color, _fontSize);
 
+		indicator = new InputIndicator(this);
 		expectedTextList = new ArrayList<>();
 
 		input = inputManager;

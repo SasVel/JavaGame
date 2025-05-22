@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaproject.data.CurrencyData;
 import com.javaproject.data.GameData;
 import com.javaproject.data.GameDayData;
+import com.javaproject.exceptions.CorruptGameDataException;
 import com.javaproject.interfaces.IGameDataListener;
 
 public final class GameDataManager {
@@ -22,7 +23,7 @@ public final class GameDataManager {
 
 	private final List<IGameDataListener> listeners;
 
-	public GameDataManager() {
+	public GameDataManager() throws CorruptGameDataException {
 		mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
@@ -64,7 +65,7 @@ public final class GameDataManager {
 		listeners.stream().forEach(l -> l.toSaveData());
 	}
 
-	public void saveData() {
+	public void saveData() throws CorruptGameDataException {
 		fetchData();
 
 		try {
@@ -73,11 +74,9 @@ public final class GameDataManager {
 			mapper.writeValue(file, jsonStr);
 			System.err.println(jsonStr);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			throw new CorruptGameDataException();
+		} catch (IOException | URISyntaxException e) {
+			throw new CorruptGameDataException();
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 
 import com.javaproject.UI.TextLabel;
 import com.javaproject.data.ItemData;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 
 public class Item extends DrawableObject{
 	private final long id;
@@ -13,7 +14,7 @@ public class Item extends DrawableObject{
 	private final TextLabel titleLabel = new TextLabel(Color.WHITE, 34);
 	private final TextLabel descLabel = new TextLabel(Color.WHITE, 25);
 
-	public Item(int _width, int _height, int _posX, int _posY, long _numOfItems, ItemData _data) {
+	public Item(int _width, int _height, int _posX, int _posY, long _numOfItems, ItemData _data) throws ResourceNotLoadedException {
 		super(_width, _height, _posX, _posY, _data);
 		
 		this.data = _data;

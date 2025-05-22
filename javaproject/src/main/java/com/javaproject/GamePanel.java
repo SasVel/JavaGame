@@ -1,6 +1,5 @@
 package com.javaproject;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,11 +7,14 @@ import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.javaproject.UI.TypePanel;
+import com.javaproject.exceptions.CorruptGameDataException;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.managers.CustomersManager;
 import com.javaproject.managers.GameController;
 import com.javaproject.managers.GameDataManager;
@@ -37,42 +39,55 @@ public final class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-
-	GameDataManager gameDataManager = new GameDataManager();
-	InputManager inputManager = new InputManager();
-	SoundManager soundManager = new SoundManager();
-	ItemsManager itemsManager = new ItemsManager();
+	GameDataManager gameDataManager;
+	InputManager inputManager;
+	SoundManager soundManager;
+	ItemsManager itemsManager;
 	
-	TypePanel typePanel = new TypePanel(inputManager, soundManager);
-	CustomersManager customersManager = new CustomersManager(typePanel, itemsManager);
+	TypePanel typePanel;
+	CustomersManager customersManager;
 
 
-	GameController gameController = new GameController(itemsManager, customersManager, gameDataManager);
+	GameController gameController;
 	private Graphics2D graphics;
 
 	//Resources
 	BufferedImage backgroundImage;
 
-	public GamePanel() {
+	public GamePanel() throws ResourceNotLoadedException {
 		super();
+
+		try {
+			gameDataManager = new GameDataManager();
+			inputManager = new InputManager();
+			soundManager = new SoundManager();
+			itemsManager = new ItemsManager();
+
+			typePanel = new TypePanel(inputManager, soundManager);
+			customersManager = new CustomersManager(typePanel, itemsManager);
+			gameController = new GameController(itemsManager, customersManager, gameDataManager);
+		} catch (CorruptGameDataException | ResourceNotLoadedException e) {
+			System.exit(0);
+		}
 		configure();
 	}
 
-	public GamePanel(LayoutManager layout) {
+	public GamePanel(LayoutManager layout) throws ResourceNotLoadedException {
 		super(layout);
 		configure();
 	}
 
-	public void configure() {
+	public void configure() throws ResourceNotLoadedException {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setDoubleBuffered(true);
 		this.addKeyListener(inputManager);
 		this.setFocusable(true);
 
+		URL resPath = getClass().getResource("/data/Background/BG.jpg");
 		try {
-			backgroundImage = ImageIO.read(getClass().getResource("/data/Background/BG.jpg"));
+			backgroundImage = ImageIO.read(resPath);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ResourceNotLoadedException(resPath.getPath());
 		}
 	}
 
@@ -108,7 +123,6 @@ public final class GamePanel extends JPanel implements Runnable{
 	}
 
 	public void onStart() {
-		this.add(typePanel, BorderLayout.EAST);
 	}
 
 	public void update(double delta) {
@@ -122,11 +136,8 @@ public final class GamePanel extends JPanel implements Runnable{
 		graphics = (Graphics2D)g;
 		graphics.drawImage(backgroundImage, 0, 0, null);
 
-		gameController.draw(graphics);
+		if (gameController != null) { gameController.draw(graphics); }
 		
-		// graphics.setColor(new Color(110, 39, 39));
-		// graphics.fillRect(0, (screenHeight / 5) * 4, screenWidth, screenHeight / 5);
-
 		graphics.dispose();
 	}
 }

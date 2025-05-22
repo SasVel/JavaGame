@@ -3,17 +3,25 @@ package com.javaproject.models;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.javaproject.data.ItemData;
 import com.javaproject.enums.TextDifficulty;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.managers.ItemsManager;
 
 public class ItemTest {
 
 	ItemData data = new ItemData("Ember Root", "TestDesc", (double)5.50d, TextDifficulty.MEDIUM);
-	ItemsManager itemsManager = new ItemsManager();
-	Item item = itemsManager.getItem(data);
+	ItemsManager itemsManager;
+	Item item;
+
+	@Before
+	public void configure() throws ResourceNotLoadedException {
+		itemsManager = new ItemsManager();
+		item = itemsManager.getItem(data);
+	}
 
 	@Test
 	public void testGetId() {

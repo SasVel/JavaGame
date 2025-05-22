@@ -1,6 +1,7 @@
 package com.javaproject.managers;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaproject.UI.TypePanel;
 import com.javaproject.data.CustomerData;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.models.Customer;
 
 public class CustomersManager {
@@ -26,16 +28,17 @@ public class CustomersManager {
 
 	private static long customersNum = 0;
 	
-	public CustomersManager(TypePanel _typePanel, ItemsManager _itemsManager) {
+	public CustomersManager(TypePanel _typePanel, ItemsManager _itemsManager) throws ResourceNotLoadedException {
 
 		typePanel = _typePanel;
 		itemsManager = _itemsManager;
+		URL dataPath = getClass().getResource("/data/customers.json");
 
 		try {
-			customersData = mapper.readValue(getClass().getResource("/data/customers.json"), new TypeReference<HashSet<CustomerData>>() {});
+			customersData = mapper.readValue(dataPath, new TypeReference<HashSet<CustomerData>>() {});
 			customersIterator = customersData.iterator();
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ResourceNotLoadedException(dataPath.getPath());
 		}
 	}
 
@@ -47,7 +50,7 @@ public class CustomersManager {
 		return customersData;
 	}
 
-	public Customer getNewCustomer(CustomerData data) {
+	public Customer getNewCustomer(CustomerData data) throws ResourceNotLoadedException {
 		customersNum++;
 		return new Customer(450, 800, 350, 300, customersNum, data, typePanel, itemsManager);
 	}
@@ -66,7 +69,7 @@ public class CustomersManager {
 		return res;
 	}
 
-	private Customer getNewRandCustomer() {
+	private Customer getNewRandCustomer() throws ResourceNotLoadedException {
 		customersNum++;
 		return new Customer(450, 800, 350, 300, customersNum, getRandCustomerData(), typePanel, itemsManager);
 	}
@@ -81,7 +84,7 @@ public class CustomersManager {
 		return resCustomers;
 	}
 
-	public List<Customer> getRandCustomersInRange(int lower, int upper) {
+	public List<Customer> getRandCustomersInRange(int lower, int upper) throws ResourceNotLoadedException {
 		int count = rand.nextInt(lower, upper + 1);
 
 		List<Customer> resCustomers = new ArrayList<>();

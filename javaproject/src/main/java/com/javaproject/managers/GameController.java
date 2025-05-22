@@ -3,6 +3,7 @@ package com.javaproject.managers;
 import java.awt.Graphics2D;
 
 import com.javaproject.UI.MoneyTracker;
+import com.javaproject.exceptions.ResourceNotLoadedException;
 import com.javaproject.interfaces.IDayDoneListener;
 import com.javaproject.interfaces.IDrawable;
 import com.javaproject.models.GameDay;
@@ -15,7 +16,7 @@ public final class GameController implements IDrawable, IDayDoneListener{
 	private final MoneyTracker moneyTracker;
 	private GameDay currentDay;
 
-	public GameController(ItemsManager _itemsManager, CustomersManager _customersManager, GameDataManager _gameDataManager) {
+	public GameController(ItemsManager _itemsManager, CustomersManager _customersManager, GameDataManager _gameDataManager) throws ResourceNotLoadedException {
 		items = _itemsManager;
 		customersManager = _customersManager;
 		gameDataManager = _gameDataManager;
